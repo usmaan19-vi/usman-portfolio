@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Usman — Web Designer</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
-
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Usman — Web Designer</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">  <style>
     * {
       margin: 0;
       padding: 0;
@@ -34,7 +25,63 @@
       text-decoration: none;
     }
 
-    /* NAVBAR */
+    /* =========================
+       ANIMATED BACKGROUND
+    ========================= */
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,.07),
+        transparent 65%
+      );
+      top: 15%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: -1;
+      animation: floatingGlow 8s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1px);
+      background-size: 70px 70px;
+      opacity: .08;
+      pointer-events: none;
+      z-index: -2;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes floatingGlow {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        transform: translate(-45%, -55%) scale(1.35);
+      }
+    }
+
+    @keyframes gridMove {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(70px);
+      }
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
 
     nav {
       position: fixed;
@@ -51,12 +98,26 @@
         rgba(0,0,0,.8),
         transparent
       );
+      transition: .4s ease;
+    }
+
+    nav.scrolled {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      background: rgba(7,7,7,.8);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
     .logo {
       font-weight: 700;
       font-size: 18px;
       letter-spacing: -1px;
+      transition: .3s;
+    }
+
+    .logo:hover {
+      letter-spacing: 2px;
     }
 
     nav .links {
@@ -66,11 +127,33 @@
       color: #aaa;
     }
 
-    nav a:hover {
+    nav .links a {
+      position: relative;
+      transition: .3s;
+    }
+
+    nav .links a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -6px;
+      left: 0;
+      background: white;
+      transition: .3s;
+    }
+
+    nav .links a:hover {
       color: white;
     }
 
-    /* HERO */
+    nav .links a:hover::after {
+      width: 100%;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       min-height: 100vh;
@@ -81,12 +164,16 @@
       padding: 100px 20px 60px;
       position: relative;
       background:
-        radial-gradient(circle at 50% 40%, #202020 0%, #070707 45%);
+        radial-gradient(
+          circle at 50% 40%,
+          #202020 0%,
+          #070707 45%
+        );
     }
 
     .hero-content {
       max-width: 850px;
-      animation: heroIn 1.2s ease forwards;
+      animation: heroIn 1.2s cubic-bezier(.16,1,.3,1) forwards;
     }
 
     .eyebrow {
@@ -95,6 +182,7 @@
       letter-spacing: 4px;
       text-transform: uppercase;
       margin-bottom: 30px;
+      animation: fadeUp 1s .15s both;
     }
 
     h1 {
@@ -102,6 +190,7 @@
       line-height: .85;
       letter-spacing: -7px;
       margin-bottom: 35px;
+      animation: titleReveal 1.3s .25s both;
     }
 
     .serif {
@@ -110,10 +199,20 @@
       font-weight: 500;
     }
 
+    h1 .serif {
+      display: inline-block;
+      animation: dotFloat 3s ease-in-out infinite;
+    }
+
     .subtitle {
       color: #999;
       font-size: clamp(18px, 3vw, 25px);
       margin-bottom: 20px;
+      animation: fadeUp 1s .45s both;
+    }
+
+    .subtitle .serif {
+      color: #eee;
     }
 
     .description {
@@ -122,6 +221,7 @@
       color: #777;
       line-height: 1.7;
       font-size: 14px;
+      animation: fadeUp 1s .6s both;
     }
 
     .buttons {
@@ -130,24 +230,53 @@
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
+      animation: fadeUp 1s .75s both;
     }
 
     .btn {
+      position: relative;
       padding: 15px 27px;
       border-radius: 50px;
       border: 1px solid #333;
-      transition: .3s;
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
       font-size: 13px;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+      );
+      transform: translateX(-120%);
+      transition: .6s;
+    }
+
+    .btn:hover::before {
+      transform: translateX(120%);
     }
 
     .btn.primary {
       background: white;
       color: black;
       border-color: white;
+      box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+
+    .btn.primary:hover {
+      box-shadow: 0 10px 40px rgba(255,255,255,.15);
     }
 
     .btn:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px) scale(1.03);
       border-color: white;
     }
 
@@ -159,9 +288,23 @@
       color: #555;
       font-size: 10px;
       letter-spacing: 3px;
+      animation: scrollBounce 2s ease-in-out infinite;
     }
 
-    /* SECTIONS */
+    @keyframes scrollBounce {
+      0%,100% {
+        transform: translate(-50%,0);
+        opacity: .5;
+      }
+      50% {
+        transform: translate(-50%,8px);
+        opacity: 1;
+      }
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
 
     section:not(.hero) {
       padding: 120px 7%;
@@ -181,7 +324,9 @@
       margin-bottom: 60px;
     }
 
-    /* WORK */
+    /* =========================
+       PROJECTS
+    ========================= */
 
     .projects {
       display: grid;
@@ -199,33 +344,78 @@
       justify-content: flex-end;
       background:
         linear-gradient(145deg, #171717, #090909);
-      transition: .5s;
+      transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        border-color .4s,
+        box-shadow .4s;
       overflow: hidden;
+      position: relative;
+    }
+
+    .project::before {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(255,255,255,.12),
+        transparent 70%
+      );
+      top: -100px;
+      right: -100px;
+      transition: .6s;
+      opacity: 0;
+    }
+
+    .project:hover::before {
+      opacity: 1;
+      transform: scale(1.4);
     }
 
     .project:hover {
-      transform: translateY(-8px);
+      transform: translateY(-10px) scale(1.015);
       border-color: #444;
+      box-shadow: 0 25px 70px rgba(0,0,0,.5);
     }
 
     .project-number {
       color: #555;
       font-size: 12px;
       margin-bottom: auto;
+      transition: .3s;
+    }
+
+    .project:hover .project-number {
+      color: #aaa;
+      transform: translateX(5px);
     }
 
     .project h3 {
       font-size: 32px;
       margin-bottom: 10px;
+      transition: .4s;
+    }
+
+    .project:hover h3 {
+      transform: translateX(6px);
     }
 
     .project p {
       color: #777;
       font-size: 13px;
       line-height: 1.6;
+      transition: .4s;
     }
 
-    /* ABOUT */
+    .project:hover p {
+      color: #aaa;
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
 
     .about {
       max-width: 850px;
@@ -240,9 +430,16 @@
 
     .about strong {
       color: white;
+      transition: .3s;
     }
 
-    /* SERVICES */
+    .about strong:hover {
+      text-shadow: 0 0 30px rgba(255,255,255,.3);
+    }
+
+    /* =========================
+       SERVICES
+    ========================= */
 
     .services {
       display: grid;
@@ -255,19 +452,53 @@
       border: 1px solid #1b1b1b;
       border-radius: 15px;
       background: #0b0b0b;
+      transition:
+        transform .5s cubic-bezier(.16,1,.3,1),
+        border-color .4s,
+        background .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      top: -50px;
+      right: -50px;
+      transition: .5s;
+    }
+
+    .service:hover {
+      transform: translateY(-8px);
+      border-color: #444;
+      background: #101010;
+    }
+
+    .service:hover::after {
+      transform: scale(2.5);
     }
 
     .service h3 {
       margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
     }
 
     .service p {
       color: #777;
       font-size: 13px;
       line-height: 1.6;
+      position: relative;
+      z-index: 1;
     }
 
-    /* CONTACT */
+    /* =========================
+       CONTACT
+    ========================= */
 
     .contact {
       text-align: center;
@@ -276,19 +507,59 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle, #181818, #070707 55%);
+      background:
+        radial-gradient(circle, #181818, #070707 55%);
+      position: relative;
+    }
+
+    .contact::before {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.04);
+      animation: contactOrb 8s linear infinite;
     }
 
     .contact h2 {
       font-size: clamp(45px, 9vw, 100px);
       letter-spacing: -5px;
       margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
     }
 
     .contact p {
       color: #777;
       margin-bottom: 35px;
+      position: relative;
+      z-index: 1;
     }
+
+    .contact .btn {
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes contactOrb {
+      0% {
+        transform: scale(.8) rotate(0deg);
+        opacity: .3;
+      }
+      50% {
+        transform: scale(1.15) rotate(180deg);
+        opacity: .7;
+      }
+      100% {
+        transform: scale(.8) rotate(360deg);
+        opacity: .3;
+      }
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       padding: 30px 7%;
@@ -299,7 +570,26 @@
       justify-content: space-between;
     }
 
-    /* ANIMATION */
+    /* =========================
+       SCROLL REVEAL
+    ========================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition:
+        opacity .9s ease,
+        transform .9s cubic-bezier(.16,1,.3,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       GENERAL ANIMATIONS
+    ========================= */
 
     @keyframes heroIn {
       from {
@@ -313,7 +603,45 @@
       }
     }
 
-    /* MOBILE */
+    @keyframes titleReveal {
+      from {
+        opacity: 0;
+        transform: translateY(60px) scale(.95);
+        filter: blur(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes dotFloat {
+      0%,100% {
+        transform: translateY(0) rotate(0);
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(5deg);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 700px) {
 
@@ -340,239 +668,338 @@
 
       footer {
         padding: 25px 20px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .project {
+        min-height: 330px;
+      }
+
+      body::before {
+        width: 300px;
+        height: 300px;
       }
     }
-  </style>
-</head>
 
-<body>
-
-  <!-- NAVIGATION -->
-
-  <nav>
-    <div class="logo">USMAN.</div>
-
-    <div class="links">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-
-  <!-- HERO -->
-
-  <section class="hero" id="home">
-
-    <div class="hero-content">
-
-      <div class="eyebrow">
-        Web Designer • Creative
-      </div>
-
-      <h1>
-        Usman<span class="serif">.</span>
-      </h1>
-
-      <div class="subtitle">
-        I create <span class="serif">web experiences</span>.
-      </div>
-
-      <p class="description">
-        I design modern, responsive websites for brands,
-        creators and businesses that want to stand out online.
-      </p>
-
-      <div class="buttons">
-        <a href="#work" class="btn primary">
-          View my work
-        </a>
-
-        <a href="#contact" class="btn">
-          Let's talk
-        </a>
-      </div>
-
-    </div>
-
-    <div class="scroll">
-      SCROLL ↓
-    </div>
-
-  </section>
-
-
-  <!-- WORK -->
-
-  <section id="work">
-
-    <div class="section-label">
-      01 — Selected Work
-    </div>
-
-    <h2 class="section-title">
-      Things I've <span class="serif">built.</span>
-    </h2>
-
-    <div class="projects">
-
-      <a
-      href="https://usmaan19-vi.github.io/bakershubcom/" class="project">
-        <div class="project-number">01</div>
-
-        <h3>Bakery</h3>
-
-        <p>
-          A premium website concept for a modern bakery
-          and café.
-        </p>
-      </a>
-
-
-      <a
-      href="https://hotel-mehak.vercel.app" class="project">
-        <div class="project-number">02</div>
-
-        <h3>Buisness</h3>
-
-        <p>
-          A professional landing page designed to turn
-          visitors into customers.
-        </p>
-      </a>
-
-
-      <div class="project">
-        <div class="project-number">03</div>
-
-        <h3>Restaurant</h3>
-
-        <p>
-          A modern digital menu and restaurant experience
-          designed for mobile customers
-        </p>
-      </div>
-
-
-      <div class="project">
-        <div class="project-number">04</div>
-
-        <h3>Portfolio</h3>
-
-        <p>
-          A creative portfolio concept for artists and
-          creators.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ABOUT -->
-
-  <section id="about">
-
-    <div class="section-label">
-      02 — About
-    </div>
-
-    <div class="about">
-
-      <p>
-        I'm <strong>Usman</strong>, a young creative
-        learning to turn ideas into
-        <strong>beautiful websites</strong>.
-        I focus on clean design, strong visuals
-        and memorable digital experiences.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- SERVICES -->
-
-  <section>
-
-    <div class="section-label">
-      03 — What I Do
-    </div>
-
-    <h2 class="section-title">
-      My <span class="serif">services.</span>
-    </h2>
-
-    <div class="services">
-
-      <div class="service">
-        <h3>Web Design</h3>
-        <p>
-          Modern and responsive websites designed
-          around your brand.
-        </p>
-      </div>
-
-      <div class="service">
-        <h3>Landing Pages</h3>
-        <p>
-          High-quality landing pages designed to
-          present products and businesses.
-        </p>
-      </div>
-
-      <div class="service">
-        <h3>Creative Design</h3>
-        <p>
-          Visual layouts, typography and digital
-          experiences that feel unique.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CONTACT -->
-
-  <section class="contact" id="contact">
-
-    <div class="section-label">
-      04 — Contact
-    </div>
-
-    <h2>
-      Let's create <span class="serif">something.</span>
-    </h2>
-
-    <p>
-      Have a project in mind?
-    </p>
-
-    <!-- CHANGE THIS EMAIL LATER -->
-
-    <a
-      href="mailto:shahusm3@gmail.com"
-      class="btn primary"
-    >
-      Get in touch →
+    /* =========================
+       REDUCED MOTION
+    ========================= */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style></head><body>  <!-- NAVIGATION -->  <nav id="navbar">
+    <div class="logo">USMAN.</div><div class="links">
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</div>
+
+  </nav>  <!-- HERO -->  <section class="hero" id="home"><div class="hero-content">
+
+  <div class="eyebrow">
+    Web Designer • Creative
+  </div>
+
+  <h1>
+    Usman<span class="serif">.</span>
+  </h1>
+
+  <div class="subtitle">
+    I create <span class="serif">web experiences</span>.
+  </div>
+
+  <p class="description">
+    I design modern, responsive websites for brands,
+    creators and businesses that want to stand out online.
+  </p>
+
+  <div class="buttons">
+    <a href="#work" class="btn primary magnetic">
+      View my work
     </a>
 
-  </section>
+    <a href="#contact" class="btn magnetic">
+      Let's talk
+    </a>
+  </div>
+
+</div>
+
+<div class="scroll">
+  SCROLL ↓
+</div>
+
+  </section>  <!-- WORK -->  <section id="work"><div class="section-label reveal">
+  01 — Selected Work
+</div>
+
+<h2 class="section-title reveal">
+  Things I've <span class="serif">built.</span>
+</h2>
+
+<div class="projects">
+
+  <a
+    href="https://usmaan19-vi.github.io/bakershubcom/"
+    class="project reveal"
+    target="_blank"
+  >
+    <div class="project-number">01</div>
+
+    <h3>Bakery</h3>
+
+    <p>
+      A premium website concept for a modern bakery
+      and café.
+    </p>
+  </a>
 
 
-  <!-- FOOTER -->
+  <a
+    href="https://hotel-mehak.vercel.app"
+    class="project reveal"
+    target="_blank"
+  >
+    <div class="project-number">02</div>
 
-  <footer>
+    <h3>Business</h3>
 
+    <p>
+      A professional landing page designed to turn
+      visitors into customers.
+    </p>
+  </a>
+
+
+  <div class="project reveal">
+    <div class="project-number">03</div>
+
+    <h3>Restaurant</h3>
+
+    <p>
+      A modern digital menu and restaurant experience
+      designed for mobile customers.
+    </p>
+  </div>
+
+
+  <div class="project reveal">
+    <div class="project-number">04</div>
+
+    <h3>Portfolio</h3>
+
+    <p>
+      A creative portfolio concept for artists and
+      creators.
+    </p>
+  </div>
+
+</div>
+
+  </section>  <!-- ABOUT -->  <section id="about"><div class="section-label reveal">
+  02 — About
+</div>
+
+<div class="about reveal">
+
+  <p>
+    I'm <strong>Usman</strong>, a young creative
+    learning to turn ideas into
+    <strong>beautiful websites</strong>.
+    I focus on clean design, strong visuals
+    and memorable digital experiences.
+  </p>
+
+</div>
+
+  </section>  <!-- SERVICES -->  <section><div class="section-label reveal">
+  03 — What I Do
+</div>
+
+<h2 class="section-title reveal">
+  My <span class="serif">services.</span>
+</h2>
+
+<div class="services">
+
+  <div class="service reveal">
+    <h3>Web Design</h3>
+    <p>
+      Modern and responsive websites designed
+      around your brand.
+    </p>
+  </div>
+
+  <div class="service reveal">
+    <h3>Landing Pages</h3>
+    <p>
+      High-quality landing pages designed to
+      present products and businesses.
+    </p>
+  </div>
+
+  <div class="service reveal">
+    <h3>Creative Design</h3>
+    <p>
+      Visual layouts, typography and digital
+      experiences that feel unique.
+    </p>
+  </div>
+
+</div>
+
+  </section>  <!-- CONTACT -->  <section class="contact" id="contact"><div class="section-label reveal">
+  04 — Contact
+</div>
+
+<h2 class="reveal">
+  Let's create <span class="serif">something.</span>
+</h2>
+
+<p class="reveal">
+  Have a project in mind?
+</p>
+
+<a
+  href="mailto:shahusm3@gmail.com"
+  class="btn primary magnetic reveal"
+>
+  Get in touch →
+</a>
+
+  </section>  <!-- FOOTER -->  <footer>
     <span>© 2026 Usman</span>
-
     <span>Designed & built by Usman.</span>
+  </footer>  <!-- =========================
+       JAVASCRIPT
+  ========================= -->  <script>
 
-  </footer>
+    /* NAVBAR SCROLL EFFECT */
 
-</body>
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+
+    /* SCROLL REVEAL */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("visible");
+
+            revealObserver.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+
+    /* MAGNETIC BUTTONS */
+
+    const magneticButtons = document.querySelectorAll(".magnetic");
+
+    magneticButtons.forEach((button) => {
+
+      button.addEventListener("mousemove", (event) => {
+
+        const rect = button.getBoundingClientRect();
+
+        const x =
+          event.clientX -
+          rect.left -
+          rect.width / 2;
+
+        const y =
+          event.clientY -
+          rect.top -
+          rect.height / 2;
+
+        button.style.transform =
+          `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.04)`;
+
+      });
+
+      button.addEventListener("mouseleave", () => {
+
+        button.style.transform = "";
+
+      });
+
+    });
+
+
+    /* PROJECT CARD MOUSE TILT */
+
+    const projects = document.querySelectorAll(".project");
+
+    projects.forEach((project) => {
+
+      project.addEventListener("mousemove", (event) => {
+
+        if (window.innerWidth < 700) return;
+
+        const rect = project.getBoundingClientRect();
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+        const rotateY =
+          ((x / rect.width) - 0.5) * 5;
+
+        const rotateX =
+          ((y / rect.height) - 0.5) * -5;
+
+        project.style.transform =
+          `perspective(900px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-10px)
+           scale(1.015)`;
+
+      });
+
+      project.addEventListener("mouseleave", () => {
+
+        project.style.transform = "";
+
+      });
+
+    });
+
+  </script></body>
 </html>
