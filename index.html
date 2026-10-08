@@ -4,20 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta name="theme-color" content="#08090d">
+  <meta name="description" content="Usman — Web Designer. Modern, responsive and creative websites.">
+
   <title>Usman — Web Designer</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap"
-    rel="stylesheet"
-  >
-
   <style>
-
     /* =====================================================
-       RESET
+       PERFORMANCE-FIRST RESET
     ===================================================== */
 
     * {
@@ -28,13 +22,15 @@
 
     html {
       scroll-behavior: smooth;
+      background: #08090d;
     }
 
     body {
-      background: #050507;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #08090d;
       color: #f5f5f5;
-      font-family: Inter, sans-serif;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
     a {
@@ -42,731 +38,330 @@
       text-decoration: none;
     }
 
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
     /* =====================================================
-       CINEMATIC BACKGROUND
+       LIGHTWEIGHT CINEMATIC BACKGROUND
+       Only transform + opacity animations
     ===================================================== */
 
-    .cinematic-bg {
+    .background {
       position: fixed;
       inset: 0;
-      z-index: -10;
+      z-index: 0;
       overflow: hidden;
       pointer-events: none;
-
       background:
         radial-gradient(
           circle at 20% 20%,
-          rgba(93, 74, 255, .18),
-          transparent 34%
+          rgba(86, 55, 180, 0.18),
+          transparent 35%
         ),
         radial-gradient(
           circle at 80% 30%,
-          rgba(0, 190, 255, .12),
+          rgba(0, 150, 255, 0.12),
           transparent 35%
         ),
-        linear-gradient(
-          135deg,
-          #040407,
-          #080b18 50%,
-          #040408
-        );
+        #08090d;
     }
 
+    /* Soft colored lights */
 
-    /* Moving colored sky */
-
-    .sky-glow {
+    .glow {
       position: absolute;
-      width: 45vw;
-      height: 45vw;
+      width: 280px;
+      height: 280px;
       border-radius: 50%;
-      filter: blur(100px);
-      opacity: .34;
-      animation: glowMove 14s ease-in-out infinite alternate;
+      opacity: 0.22;
+      filter: blur(45px);
+      will-change: transform;
     }
 
-    .glow-one {
-      background: #6555ff;
-      top: -18%;
-      left: -12%;
+    .glow.one {
+      background: #7048ff;
+      left: -120px;
+      top: 10%;
+      animation: glowOne 14s ease-in-out infinite alternate;
     }
 
-    .glow-two {
-      background: #00bfff;
-      right: -18%;
-      top: 20%;
-      animation-delay: -6s;
+    .glow.two {
+      background: #00aaff;
+      right: -130px;
+      top: 40%;
+      animation: glowTwo 17s ease-in-out infinite alternate;
     }
 
-    @keyframes glowMove {
-
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-
-      50% {
-        transform: translate3d(100px, 60px, 0) scale(1.15);
-      }
-
-      100% {
-        transform: translate3d(-60px, 120px, 0) scale(.95);
-      }
+    .glow.three {
+      background: #ff3d81;
+      left: 30%;
+      bottom: -180px;
+      animation: glowThree 19s ease-in-out infinite alternate;
     }
 
-
-    /* =====================================================
-       BLURRY CLOUDS
-    ===================================================== */
-
-    .cloud {
-      position: absolute;
-
-      width: 420px;
-      height: 130px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          ellipse,
-          rgba(255,255,255,.07),
-          rgba(255,255,255,.015),
-          transparent 70%
-        );
-
-      filter: blur(35px);
-
-      opacity: .65;
-
-      animation:
-        cloudMove 38s linear infinite;
-    }
-
-    .cloud-one {
-      top: 13%;
-      left: -500px;
-    }
-
-    .cloud-two {
-      top: 42%;
-      left: -650px;
-      width: 560px;
-      height: 150px;
-      animation-duration: 48s;
-      animation-delay: -15s;
-    }
-
-    .cloud-three {
-      top: 70%;
-      left: -500px;
-      width: 360px;
-      animation-duration: 42s;
-      animation-delay: -25s;
-    }
-
-    @keyframes cloudMove {
-
+    @keyframes glowOne {
       from {
-        transform:
-          translateX(0)
-          scale(1);
+        transform: translate3d(0, 0, 0);
       }
-
       to {
-        transform:
-          translateX(150vw)
-          scale(1.25);
+        transform: translate3d(90px, 80px, 0);
       }
     }
 
+    @keyframes glowTwo {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+      to {
+        transform: translate3d(-80px, 100px, 0);
+      }
+    }
 
-    /* =====================================================
-       MOVING WAVES
-    ===================================================== */
+    @keyframes glowThree {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+      to {
+        transform: translate3d(100px, -80px, 0);
+      }
+    }
+
+    /* Moving waves */
 
     .wave {
       position: absolute;
-
-      width: 170%;
-      height: 300px;
-
-      left: -35%;
-      bottom: -150px;
-
+      left: -10%;
+      width: 120%;
+      height: 170px;
       border-radius: 50%;
-
-      filter: blur(35px);
-
-      opacity: .2;
-
-      transform-origin: center;
-
-      animation:
-        waveMove 13s ease-in-out infinite alternate;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      will-change: transform;
     }
 
-    .wave-one {
-      background:
-        linear-gradient(
-          90deg,
-          #6655ff,
-          #00bfff,
-          #9c4dff
-        );
+    .wave.one {
+      bottom: 15%;
+      transform: rotate(-5deg);
+      animation: waveMove 18s ease-in-out infinite alternate;
     }
 
-    .wave-two {
-      bottom: -195px;
-
-      background:
-        linear-gradient(
-          90deg,
-          #00bfff,
-          #6655ff,
-          #ff4ecd
-        );
-
-      animation-duration: 17s;
-      animation-delay: -5s;
-    }
-
-    .wave-three {
-      bottom: -240px;
-
-      background:
-        linear-gradient(
-          90deg,
-          #ff4ecd,
-          #6655ff,
-          #00bfff
-        );
-
-      animation-duration: 21s;
-      animation-delay: -9s;
+    .wave.two {
+      bottom: 8%;
+      transform: rotate(4deg);
+      opacity: 0.45;
+      animation: waveMoveTwo 22s ease-in-out infinite alternate;
     }
 
     @keyframes waveMove {
-
-      0% {
-        transform:
-          translateX(-4%)
-          rotate(-2deg)
-          scaleY(.9);
-      }
-
-      50% {
-        transform:
-          translateX(4%)
-          rotate(2deg)
-          scaleY(1.2);
-      }
-
-      100% {
-        transform:
-          translateX(-2%)
-          rotate(-1deg)
-          scaleY(1);
-      }
-    }
-
-
-    /* =====================================================
-       FLOATING PARTICLES
-    ===================================================== */
-
-    .stars {
-      position: absolute;
-      inset: 0;
-
-      opacity: .18;
-
-      background-image:
-        radial-gradient(
-          circle,
-          rgba(255,255,255,.8) 1px,
-          transparent 1px
-        );
-
-      background-size: 90px 90px;
-
-      animation:
-        starsMove 22s linear infinite;
-    }
-
-    @keyframes starsMove {
-
       from {
-        transform: translateY(0);
+        transform: translate3d(-3%, 0, 0) rotate(-5deg);
       }
-
       to {
-        transform: translateY(-90px);
+        transform: translate3d(3%, -20px, 0) rotate(-2deg);
       }
     }
 
-
-    /* =====================================================
-       FILM GRAIN
-    ===================================================== */
-
-    .film-grain {
-      position: absolute;
-      inset: 0;
-
-      opacity: .025;
-
-      background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    @keyframes waveMoveTwo {
+      from {
+        transform: translate3d(3%, 0, 0) rotate(4deg);
+      }
+      to {
+        transform: translate3d(-3%, -15px, 0) rotate(1deg);
+      }
     }
 
-
     /* =====================================================
-       CURSOR GLOW
+       CONTENT
     ===================================================== */
 
-    .cursor-glow {
-      position: fixed;
-
-      width: 320px;
-      height: 320px;
-
-      border-radius: 50%;
-
-      pointer-events: none;
-
-      z-index: 999;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(70, 170, 255, .13),
-          transparent 65%
-        );
-
-      transform:
-        translate(-50%, -50%);
-
-      mix-blend-mode: screen;
-
-      transition:
-        left .08s linear,
-        top .08s linear;
-        opacity: .8;
+    .site {
+      position: relative;
+      z-index: 1;
     }
 
+    .container {
+      width: min(1100px, calc(100% - 40px));
+      margin: auto;
+    }
 
     /* =====================================================
        NAVBAR
     ===================================================== */
 
     nav {
-      position: fixed;
-
+      position: sticky;
       top: 0;
-      left: 0;
+      z-index: 50;
 
-      width: 100%;
-
-      padding: 25px 7%;
+      height: 70px;
 
       display: flex;
-
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
 
-      z-index: 100;
-
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,.75),
-          transparent
-        );
-
-      transition: .4s ease;
-    }
-
-    nav.scrolled {
-      padding-top: 16px;
-      padding-bottom: 16px;
-
-      background:
-        rgba(5,5,10,.72);
-
-      backdrop-filter: blur(18px);
-
-      border-bottom:
-        1px solid rgba(255,255,255,.06);
+      background: rgba(8, 9, 13, 0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
     .logo {
-      font-weight: 700;
       font-size: 18px;
-      letter-spacing: -1px;
-
-      transition: .4s;
+      font-weight: 800;
+      letter-spacing: 2px;
     }
 
-    .logo:hover {
-      letter-spacing: 3px;
-    }
-
-    nav .links {
+    .nav-links {
       display: flex;
-      gap: 30px;
-
-      font-size: 13px;
-
+      gap: 28px;
+      font-size: 14px;
       color: #aaa;
     }
 
-    nav .links a {
-      position: relative;
-
-      transition: .3s;
+    .nav-links a {
+      transition: color 0.2s ease;
     }
 
-    nav .links a::after {
-      content: "";
-
-      position: absolute;
-
-      width: 0;
-      height: 1px;
-
-      bottom: -6px;
-      left: 0;
-
-      background:
-        linear-gradient(
-          90deg,
-          #6b5cff,
-          #00c8ff
-        );
-
-      transition: .3s;
-    }
-
-    nav .links a:hover {
+    .nav-links a:hover {
       color: white;
     }
-
-    nav .links a:hover::after {
-      width: 100%;
-    }
-
 
     /* =====================================================
        HERO
     ===================================================== */
 
     .hero {
-      min-height: 100vh;
-
+      min-height: calc(100vh - 70px);
       display: flex;
-
       align-items: center;
-      justify-content: center;
-
-      text-align: center;
-
-      padding:
-        100px 20px 60px;
-
-      position: relative;
-
-      background:
-        radial-gradient(
-          circle at 50% 45%,
-          rgba(35,35,65,.45),
-          transparent 48%
-        );
+      padding: 80px 0;
     }
 
     .hero-content {
-      max-width: 850px;
-
-      animation:
-        heroIn 1.2s
-        cubic-bezier(.16,1,.3,1)
-        forwards;
+      max-width: 780px;
     }
 
     .eyebrow {
-      color: #9c9ca8;
-
-      font-size: 12px;
-
-      letter-spacing: 4px;
-
-      text-transform: uppercase;
-
-      margin-bottom: 30px;
-
-      animation:
-        fadeUp 1s .15s both;
-    }
-
-    h1 {
-      font-size:
-        clamp(60px, 12vw, 150px);
-
-      line-height: .85;
-
-      letter-spacing: -7px;
-
-      margin-bottom: 35px;
-
-      animation:
-        titleReveal 1.3s .25s both;
-
-      text-shadow:
-        0 0 60px rgba(100,100,255,.08);
-    }
-
-    .serif {
-      font-family:
-        "Playfair Display",
-        serif;
-
-      font-style: italic;
-
-      font-weight: 500;
-    }
-
-    h1 .serif {
       display: inline-block;
 
-      background:
-        linear-gradient(
-          120deg,
-          #ffffff,
-          #9d8cff,
-          #75dfff,
-          #ffffff
-        );
+      padding: 8px 14px;
+      margin-bottom: 22px;
 
-      background-size: 250% auto;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.04);
+
+      color: #aaa;
+      font-size: 13px;
+      letter-spacing: 1px;
+
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(52px, 11vw, 110px);
+      line-height: 0.95;
+      letter-spacing: -5px;
+      margin-bottom: 25px;
+
+      background: linear-gradient(
+        110deg,
+        #ffffff,
+        #b9b9c8 45%,
+        #7f6cff
+      );
 
       -webkit-background-clip: text;
       background-clip: text;
-
       color: transparent;
 
-      animation:
-        dotFloat 3s ease-in-out infinite,
-        gradientText 6s linear infinite;
+      animation: fadeUp 0.8s ease 0.1s both;
     }
 
-    @keyframes gradientText {
-
-      0% {
-        background-position: 0% center;
-      }
-
-      100% {
-        background-position: 250% center;
-      }
-    }
-
-    .subtitle {
-      color: #999;
-
-      font-size:
-        clamp(18px, 3vw, 25px);
-
+    .hero h2 {
+      font-size: clamp(24px, 5vw, 48px);
+      font-weight: 500;
+      line-height: 1.1;
       margin-bottom: 20px;
 
-      animation:
-        fadeUp 1s .45s both;
+      animation: fadeUp 0.8s ease 0.2s both;
     }
 
-    .subtitle .serif {
-      color: #eee;
+    .hero p {
+      max-width: 650px;
+      color: #a5a5ad;
+      font-size: 17px;
+      margin-bottom: 32px;
+
+      animation: fadeUp 0.8s ease 0.3s both;
     }
-
-    .description {
-      max-width: 520px;
-
-      margin: auto;
-
-      color: #858590;
-
-      line-height: 1.7;
-
-      font-size: 14px;
-
-      animation:
-        fadeUp 1s .6s both;
-    }
-
-
-    /* =====================================================
-       BUTTONS
-    ===================================================== */
 
     .buttons {
-      margin-top: 40px;
-
       display: flex;
-
-      justify-content: center;
-
-      gap: 15px;
-
+      gap: 12px;
       flex-wrap: wrap;
 
-      animation:
-        fadeUp 1s .75s both;
+      animation: fadeUp 0.8s ease 0.4s both;
     }
 
     .btn {
-      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-      padding:
-        15px 27px;
+      padding: 14px 22px;
 
-      border-radius: 50px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
 
-      border:
-        1px solid rgba(255,255,255,.16);
+      font-size: 14px;
+      font-weight: 600;
 
       transition:
-        transform .3s ease,
-        border-color .3s ease,
-        box-shadow .3s ease;
-
-      font-size: 13px;
-
-      overflow: hidden;
-
-      background:
-        rgba(255,255,255,.025);
-
-      backdrop-filter: blur(10px);
-    }
-
-    .btn::before {
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background:
-        linear-gradient(
-          120deg,
-          transparent,
-          rgba(255,255,255,.4),
-          transparent
-        );
-
-      transform:
-        translateX(-120%);
-
-      transition: .6s;
-    }
-
-    .btn:hover::before {
-      transform:
-        translateX(120%);
+        transform 0.2s ease,
+        background 0.2s ease;
     }
 
     .btn.primary {
       background: white;
-
-      color: black;
-
-      border-color: white;
-
-      box-shadow:
-        0 0 30px
-        rgba(130,120,255,.08);
+      color: #090909;
     }
 
-    .btn.primary:hover {
-      box-shadow:
-        0 10px 45px
-        rgba(120,150,255,.25);
+    .btn.secondary {
+      background: rgba(255,255,255,0.04);
+      color: white;
     }
 
     .btn:hover {
-      border-color: rgba(150,190,255,.7);
+      transform: translateY(-3px);
     }
 
-
-    /* =====================================================
-       SCROLL INDICATOR
-    ===================================================== */
-
-    .scroll {
-      position: absolute;
-
-      bottom: 30px;
-      left: 50%;
-
-      transform:
-        translateX(-50%);
-
-      color: #666;
-
-      font-size: 10px;
-
-      letter-spacing: 3px;
-
-      animation:
-        scrollBounce 2s ease-in-out infinite;
+    .btn:active {
+      transform: scale(0.97);
     }
-
-    @keyframes scrollBounce {
-
-      0%,100% {
-        transform:
-          translate(-50%,0);
-
-        opacity: .5;
-      }
-
-      50% {
-        transform:
-          translate(-50%,8px);
-
-        opacity: 1;
-      }
-    }
-
 
     /* =====================================================
        SECTIONS
     ===================================================== */
 
-    section:not(.hero) {
-      padding:
-        120px 7%;
+    section {
+      padding: 100px 0;
     }
 
     .section-label {
-      color: #72727c;
-
-      font-size: 11px;
-
-      letter-spacing: 3px;
-
+      color: #777;
+      font-size: 12px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-
-      margin-bottom: 25px;
+      margin-bottom: 12px;
     }
 
     .section-title {
-      font-size:
-        clamp(40px, 7vw, 80px);
-
-      letter-spacing: -4px;
-
-      margin-bottom: 60px;
+      font-size: clamp(32px, 6vw, 60px);
+      letter-spacing: -2px;
+      margin-bottom: 45px;
     }
-
 
     /* =====================================================
        PROJECTS
@@ -774,206 +369,113 @@
 
     .projects {
       display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 25px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
     }
 
     .project {
-      min-height: 380px;
+      min-height: 280px;
 
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      border-radius: 20px;
-
-      padding: 35px;
+      padding: 30px;
 
       display: flex;
-
       flex-direction: column;
-
       justify-content: flex-end;
+
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
 
       background:
         linear-gradient(
           145deg,
-          rgba(30,30,45,.7),
-          rgba(7,7,12,.8)
+          rgba(255,255,255,0.07),
+          rgba(255,255,255,0.02)
         );
-
-      backdrop-filter:
-        blur(12px);
 
       transition:
-        transform .5s
-        cubic-bezier(.16,1,.3,1),
-
-        border-color .4s,
-
-        box-shadow .4s;
-
-      overflow: hidden;
-
-      position: relative;
-    }
-
-    .project::before {
-      content: "";
-
-      position: absolute;
-
-      width: 300px;
-      height: 300px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(90,120,255,.22),
-          transparent 70%
-        );
-
-      top: -130px;
-      right: -130px;
-
-      opacity: 0;
-
-      transition: .6s;
-    }
-
-    .project::after {
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      background:
-        linear-gradient(
-          120deg,
-          transparent 20%,
-          rgba(255,255,255,.035),
-          transparent 80%
-        );
-
-      transform:
-        translateX(-100%);
-
-      transition:
-        transform .8s;
-    }
-
-    .project:hover::before {
-      opacity: 1;
-
-      transform:
-        scale(1.4);
-    }
-
-    .project:hover::after {
-      transform:
-        translateX(100%);
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
     }
 
     .project:hover {
-      border-color:
-        rgba(130,160,255,.35);
-
-      box-shadow:
-        0 30px 90px
-        rgba(0,0,0,.55),
-        0 0 50px
-        rgba(70,100,255,.06);
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.2);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.10),
+          rgba(255,255,255,0.03)
+        );
     }
 
     .project-number {
-      color: #555;
-
-      font-size: 12px;
-
+      color: #777;
+      font-size: 13px;
       margin-bottom: auto;
-
-      transition: .3s;
-    }
-
-    .project:hover .project-number {
-      color: #9c9cff;
-
-      transform:
-        translateX(5px);
     }
 
     .project h3 {
-      font-size: 32px;
-
-      margin-bottom: 10px;
-
-      transition: .4s;
-
-      position: relative;
-
-      z-index: 2;
-    }
-
-    .project:hover h3 {
-      transform:
-        translateX(6px);
+      font-size: 30px;
+      margin-bottom: 8px;
     }
 
     .project p {
-      color: #777;
+      color: #999;
+      margin-bottom: 20px;
+    }
 
+    .project-link {
       font-size: 13px;
-
-      line-height: 1.6;
-
-      transition: .4s;
-
-      position: relative;
-
-      z-index: 2;
+      color: #fff;
     }
-
-    .project:hover p {
-      color: #aaa;
-    }
-
 
     /* =====================================================
        ABOUT
     ===================================================== */
 
-    .about {
-      max-width: 850px;
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
     }
 
-    .about p {
-      font-size:
-        clamp(25px, 4vw, 45px);
-
-      line-height: 1.25;
-
-      color: #888;
-
-      letter-spacing: -1px;
+    .about-text {
+      color: #aaa;
+      font-size: 18px;
+      line-height: 1.8;
     }
 
-    .about strong {
+    .about-text strong {
       color: white;
-
-      transition: .3s;
     }
 
-    .about strong:hover {
-      text-shadow:
-        0 0 30px
-        rgba(120,150,255,.4);
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
+    .stat {
+      padding: 25px;
+
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+
+      background: rgba(255,255,255,0.035);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      color: #888;
+      font-size: 13px;
+    }
 
     /* =====================================================
        SERVICES
@@ -981,103 +483,35 @@
 
     .services {
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
+      grid-template-columns: repeat(3, 1fr);
       gap: 15px;
     }
 
     .service {
-      padding: 35px;
+      padding: 28px;
 
-      border:
-        1px solid rgba(255,255,255,.07);
+      min-height: 190px;
 
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 18px;
 
-      background:
-        rgba(10,10,18,.65);
-
-      backdrop-filter:
-        blur(12px);
-
-      transition:
-        transform .5s
-        cubic-bezier(.16,1,.3,1),
-
-        border-color .4s,
-
-        background .4s;
-
-      position: relative;
-
-      overflow: hidden;
+      background: rgba(255,255,255,0.035);
     }
 
-    .service::after {
-      content: "";
-
-      position: absolute;
-
-      width: 120px;
-      height: 120px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(80,150,255,.16),
-          transparent 70%
-        );
-
-      top: -60px;
-      right: -60px;
-
-      transition: .6s;
-    }
-
-    .service:hover {
-      transform:
-        translateY(-10px);
-
-      border-color:
-        rgba(100,150,255,.3);
-
-      background:
-        rgba(20,20,32,.75);
-
-      box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.3);
-    }
-
-    .service:hover::after {
-      transform:
-        scale(2.5);
+    .service-number {
+      color: #777;
+      font-size: 12px;
     }
 
     .service h3 {
-      margin-bottom: 15px;
-
-      position: relative;
-
-      z-index: 1;
+      margin: 35px 0 8px;
+      font-size: 21px;
     }
 
     .service p {
-      color: #777;
-
-      font-size: 13px;
-
-      line-height: 1.6;
-
-      position: relative;
-
-      z-index: 1;
+      color: #888;
+      font-size: 14px;
     }
-
 
     /* =====================================================
        CONTACT
@@ -1085,361 +519,655 @@
 
     .contact {
       text-align: center;
-
-      min-height: 70vh;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(30,35,70,.5),
-          transparent 60%
-        );
-
-      position: relative;
-
-      overflow: hidden;
-    }
-
-    .contact::before {
-      content: "";
-
-      position: absolute;
-
-      width: 350px;
-      height: 350px;
-
-      border-radius: 50%;
-
-      border:
-        1px solid
-        rgba(120,140,255,.12);
-
-      box-shadow:
-        0 0 100px
-        rgba(70,100,255,.08);
-
-      animation:
-        contactOrb 8s linear infinite;
+      padding: 130px 0;
     }
 
     .contact h2 {
-      font-size:
-        clamp(45px, 9vw, 100px);
-
-      letter-spacing: -5px;
-
-      margin-bottom: 25px;
-
-      position: relative;
-
-      z-index: 1;
+      font-size: clamp(40px, 9vw, 85px);
+      letter-spacing: -4px;
+      line-height: 1;
+      margin-bottom: 22px;
     }
 
     .contact p {
-      color: #777;
-
-      margin-bottom: 35px;
-
-      position: relative;
-
-      z-index: 1;
+      color: #999;
+      margin-bottom: 30px;
     }
-
-    .contact .btn {
-      position: relative;
-
-      z-index: 2;
-    }
-
-    @keyframes contactOrb {
-
-      0% {
-        transform:
-          scale(.8)
-          rotate(0deg);
-
-        opacity: .3;
-      }
-
-      50% {
-        transform:
-          scale(1.15)
-          rotate(180deg);
-
-        opacity: .7;
-      }
-
-      100% {
-        transform:
-          scale(.8)
-          rotate(360deg);
-
-        opacity: .3;
-      }
-    }
-
 
     /* =====================================================
        FOOTER
     ===================================================== */
 
     footer {
-      padding:
-        30px 7%;
+      padding: 30px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: #666;
+      font-size: 13px;
+    }
 
-      border-top:
-        1px solid rgba(255,255,255,.06);
-
-      color: #555;
-
-      font-size: 12px;
-
+    .footer-inner {
       display: flex;
-
-      justify-content:
-        space-between;
+      justify-content: space-between;
+      gap: 20px;
     }
 
-
     /* =====================================================
-       SCROLL REVEAL
+       SIMPLE LOAD ANIMATION
     ===================================================== */
 
-    .reveal {
-      opacity: 0;
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
 
-      transform:
-        translateY(50px);
-
-      transition:
-        opacity .9s ease,
-
-        transform .9s
-        cubic-bezier(.16,1,.3,1);
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .reveal.visible {
-      opacity: 1;
+    /* =====================================================
+       MOBILE
+    ===================================================== */
 
-      transform:
-        translateY(0);
+    @media (max-width: 700px) {
+
+      .container {
+        width: min(100% - 28px, 1100px);
+      }
+
+      nav {
+        height: 62px;
+      }
+
+      .nav-links {
+        gap: 14px;
+        font-size: 12px;
+      }
+
+      .logo {
+        font-size: 16px;
+      }
+
+      .hero {
+        min-height: calc(100vh - 62px);
+        padding: 65px 0;
+      }
+
+      .hero h1 {
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .project {
+        min-height: 240px;
+        padding: 25px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .service {
+        min-height: 160px;
+      }
+
+      .contact {
+        padding: 90px 0;
+      }
+
+      .contact h2 {
+        letter-spacing: -2px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      /* Smaller effects on phones */
+
+      .glow {
+        width: 180px;
+        height: 180px;
+        filter: blur(30px);
+        opacity: 0.17;
+      }
+
+      .wave {
+        height: 120px;
+      }
     }
 
-
-    /* ===================================================
-    
-    const revealElements =
-      document.querySelectorAll(
-        ".reveal"
-      );
-
-    const revealObserver =
-      new IntersectionObserver(
-
-        (entries) => {
-
-          entries.forEach(
-            (entry) => {
-
-              if (
-                entry.isIntersecting
-              ) {
-
-                entry.target.classList.add(
-                  "visible"
-                );
-
-                revealObserver.unobserve(
-                  entry.target
-                );
-
-              }
-
-            }
-          );
-
-        },
-
-        {
-          threshold: .12
-        }
-
-      );
-
-
-    revealElements.forEach(
-      (element) => {
-
-        revealObserver.observe(
-          element
-        );
-
-      }
-    );
-
-
     /* =====================================================
-       CURSOR GLOW
+       VERY LOW-END DEVICES
     ===================================================== */
 
-    const cursorGlow =
-      document.querySelector(
-        ".cursor-glow"
-      );
+    @media (max-width: 400px) {
 
-
-    document.addEventListener(
-      "mousemove",
-      (event) => {
-
-        cursorGlow.style.left =
-          event.clientX + "px";
-
-        cursorGlow.style.top =
-          event.clientY + "px";
-
+      .container {
+        width: calc(100% - 22px);
       }
-    );
 
+      .nav-links {
+        gap: 9px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      .hero h2 {
+        font-size: 25px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .project h3 {
+        font-size: 25px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .glow {
+        width: 140px;
+        height: 140px;
+        filter: blur(20px);
+      }
+    }
 
     /* =====================================================
-       MAGNETIC BUTTONS
+       ACCESSIBILITY + PERFORMANCE
     ===================================================== */
 
-    const magneticButtons =
-      document.querySelectorAll(
-        ".magnetic"
-      );
+    @media (prefers-reduced-motion: reduce) {
 
-
-    magneticButtons.forEach(
-      (button) => {
-
-        button.addEventListener(
-          "mousemove",
-          (event) => {
-
-            if (
-              window.innerWidth < 700
-            ) return;
-
-            const rect =
-              button.getBoundingClientRect();
-
-            const x =
-              event.clientX -
-              rect.left -
-              rect.width / 2;
-
-            const y =
-              event.clientY -
-              rect.top -
-              rect.height / 2;
-
-            button.style.transform =
-              `translate(
-                ${x * .15}px,
-                ${y * .15}px
-              ) scale(1.04)`;
-
-          }
-        );
-
-
-        button.addEventListener(
-          "mouseleave",
-          () => {
-
-            button.style.transform =
-              "";
-
-          }
-        );
-
+      html {
+        scroll-behavior: auto;
       }
-    );
 
-
-    /* =====================================================
-       PROJECT CARD 3D TILT
-    ===================================================== */
-
-    const projects =
-      document.querySelectorAll(
-        ".project"
-      );
-
-
-    projects.forEach(
-      (project) => {
-
-        project.addEventListener(
-          "mousemove",
-          (event) => {
-
-            if (
-              window.innerWidth < 700
-            ) return;
-
-            const rect =
-              project.getBoundingClientRect();
-
-            const x =
-              event.clientX -
-              rect.left;
-
-            const y =
-              event.clientY -
-              rect.top;
-
-            const rotateY =
-              (
-                (x / rect.width) -
-                .5
-              ) * 5;
-
-            const rotateX =
-              (
-                (y / rect.height) -
-                .5
-              ) * -5;
-
-
-            project.style.transform =
-              `perspective(900px)
-               rotateX(${rotateX}deg)
-               rotateY(${rotateY}deg)
-               translateY(-10px)
-               scale(1.015)`;
-
-          }
-        );
-
-
-        project.addEventListener(
-          "mouseleave",
-          () => {
-
-            project.style.transform =
-              "";
-
-          }
-        );
-
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
-    );
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       BACKGROUND
+  ===================================================== -->
+
+  <div class="background" aria-hidden="true">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+
+    <div class="wave one"></div>
+    <div class="wave two"></div>
+  </div>
 
 
-  </script>
+  <!-- =====================================================
+       WEBSITE
+  ===================================================== -->
 
+  <div class="site">
+
+    <!-- NAVIGATION -->
+
+    <nav>
+      <div class="container" style="
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+      ">
+
+        <a href="#" class="logo">
+          USMAN.
+        </a>
+
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+      </div>
+    </nav>
+
+
+    <!-- ===================================================
+         HERO
+    ==================================================== -->
+
+    <main>
+
+      <section class="hero">
+
+        <div class="container">
+
+          <div class="hero-content">
+
+            <span class="eyebrow">
+              WEB DESIGNER • CREATIVE
+            </span>
+
+            <h1>
+              Usman.
+            </h1>
+
+            <h2>
+              I create web experiences
+              that people remember.
+            </h2>
+
+            <p>
+              I design modern, responsive and visually
+              engaging websites for businesses, brands
+              and creators.
+            </p>
+
+            <div class="buttons">
+
+              <a href="#work" class="btn primary">
+                View My Work
+              </a>
+
+              <a href="#contact" class="btn secondary">
+                Let's Work Together
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           WORK
+      ================================================== -->
+
+      <section id="work">
+
+        <div class="container">
+
+          <div class="section-label">
+            Selected Work
+          </div>
+
+          <h2 class="section-title">
+            Projects.
+          </h2>
+
+          <div class="projects">
+
+
+            <!-- PROJECT 01 -->
+
+            <a
+              href="https://usmaan19-vi.github.io/bakershubcom/"
+              target="_blank"
+              rel="noopener"
+              class="project"
+            >
+
+              <span class="project-number">
+                01 / BUSINESS
+              </span>
+
+              <h3>
+                Bakers Hub
+              </h3>
+
+              <p>
+                Modern website concept for a bakery brand.
+              </p>
+
+              <span class="project-link">
+                View Project →
+              </span>
+
+            </a>
+
+
+            <!-- PROJECT 02 -->
+
+            <a
+              href="https://hotel-mehak.vercel.app"
+              target="_blank"
+              rel="noopener"
+              class="project"
+            >
+
+              <span class="project-number">
+                02 / HOTEL
+              </span>
+
+              <h3>
+                Hotel Mehak
+              </h3>
+
+              <p>
+                Elegant hotel website designed around
+                a premium hospitality experience.
+              </p>
+
+              <span class="project-link">
+                View Project →
+              </span>
+
+            </a>
+
+
+            <!-- PROJECT 03 -->
+
+            <a
+              href="#contact"
+              class="project"
+            >
+
+              <span class="project-number">
+                03 / RESTAURANT
+              </span>
+
+              <h3>
+                Restaurant
+              </h3>
+
+              <p>
+                A modern restaurant website concept
+                focused on menu and customer experience.
+              </p>
+
+              <span class="project-link">
+                View Concept →
+              </span>
+
+            </a>
+
+
+            <!-- PROJECT 04 -->
+
+            <a
+              href="#"
+              class="project"
+            >
+
+              <span class="project-number">
+                04 / PORTFOLIO
+              </span>
+
+              <h3>
+                My Portfolio
+              </h3>
+
+              <p>
+                My own creative portfolio and web design
+                showcase.
+              </p>
+
+              <span class="project-link">
+                You're Here →
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           ABOUT
+      ================================================== -->
+
+      <section id="about">
+
+        <div class="container">
+
+          <div class="section-label">
+            About Me
+          </div>
+
+          <h2 class="section-title">
+            Designing with purpose.
+          </h2>
+
+          <div class="about-grid">
+
+            <div class="about-text">
+
+              <p>
+                I'm <strong>Usman</strong>, a young web designer
+                focused on creating websites that look modern,
+                feel smooth and work beautifully across devices.
+              </p>
+
+              <br>
+
+              <p>
+                I combine clean design, thoughtful layouts
+                and AI-assisted development to turn ideas
+                into real websites.
+              </p>
+
+            </div>
+
+
+            <div class="stats">
+
+              <div class="stat">
+                <strong>100%</strong>
+                <span>Responsive Design</span>
+              </div>
+
+              <div class="stat">
+                <strong>24/7</strong>
+                <span>Creative Ideas</span>
+              </div>
+
+              <div class="stat">
+                <strong>∞</strong>
+                <span>Possibilities</span>
+              </div>
+
+              <div class="stat">
+                <strong>01</strong>
+                span>Goal — Great Websites</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           SERVICES
+      ================================================== -->
+
+      <section id="services">
+
+        <div class="container">
+
+          <div class="section-label">
+            What I Do
+          </div>
+
+          <h2 class="section-title">
+            Services.
+          </h2>
+
+          <div class="services">
+
+
+            <div class="service">
+
+              <span class="service-number">
+                01
+              </span>
+
+              <h3>
+                Web Design
+              </h3>
+
+              <p>
+                Modern layouts and visual experiences
+                designed around your brand.
+              </p>
+
+            </div>
+
+
+            <div class="service">
+
+              <span class="service-number">
+                02
+              </span>
+
+              <h3>
+                Website Development
+              </h3>
+
+              <p>
+                Responsive websites that work smoothly
+                across phones, tablets and computers.
+              </p>
+
+            </div>
+
+
+            <div class="service">
+
+              <span class="service-number">
+                03
+              </span>
+
+              <h3>
+                Landing Pages
+              </h3>
+
+              <p>
+                High-impact pages designed to present
+                products, services and businesses.
+              </p>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           CONTACT
+      ================================================== -->
+
+      <section id="contact" class="contact">
+
+        <div class="container">
+
+          <div class="section-label">
+            Have a project?
+          </div>
+
+          <h2>
+            Let's create<br>
+            something great.
+          </h2>
+
+          <p>
+            Have an idea for a website?
+            Let's talk.
+          </p>
+
+          <a
+            href="mailto:shahusm3@gmail.com"
+            class="btn primary"
+          >
+            Get In Touch →
+          </a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ===================================================
+         FOOTER
+    ==================================================== -->
+
+    <footer>
+
+      <div class="container">
+
+        <div class="footer-inner">
+
+          <span>
+            © 2026 Usman. All rights reserved.
+          </span>
+
+          <span>
+            Web Designer • Creative
+          </span>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
 
 </body>
 </html>
+                
