@@ -1,8 +1,25 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Usman — Web Designer</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Usman — Web Designer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
     * {
       margin: 0;
       padding: 0;
@@ -14,7 +31,7 @@
     }
 
     body {
-      background: #070707;
+      background: #050507;
       color: #f5f5f5;
       font-family: Inter, sans-serif;
       overflow-x: hidden;
@@ -25,121 +42,409 @@
       text-decoration: none;
     }
 
-    /* =========================
-       ANIMATED BACKGROUND
-    ========================= */
 
-    body::before {
-      content: "";
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(255,255,255,.07),
-        transparent 65%
-      );
-      top: 15%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: -1;
-      animation: floatingGlow 8s ease-in-out infinite alternate;
-    }
+    /* =====================================================
+       CINEMATIC BACKGROUND
+    ===================================================== */
 
-    body::after {
-      content: "";
+    .cinematic-bg {
       position: fixed;
       inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.12) 1px, transparent 1px);
-      background-size: 70px 70px;
-      opacity: .08;
+      z-index: -10;
+      overflow: hidden;
       pointer-events: none;
-      z-index: -2;
-      animation: gridMove 20s linear infinite;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(93, 74, 255, .18),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 80% 30%,
+          rgba(0, 190, 255, .12),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #040407,
+          #080b18 50%,
+          #040408
+        );
     }
 
-    @keyframes floatingGlow {
+
+    /* Moving colored sky */
+
+    .sky-glow {
+      position: absolute;
+      width: 45vw;
+      height: 45vw;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .34;
+      animation: glowMove 14s ease-in-out infinite alternate;
+    }
+
+    .glow-one {
+      background: #6555ff;
+      top: -18%;
+      left: -12%;
+    }
+
+    .glow-two {
+      background: #00bfff;
+      right: -18%;
+      top: 20%;
+      animation-delay: -6s;
+    }
+
+    @keyframes glowMove {
+
       0% {
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
+
+      50% {
+        transform: translate3d(100px, 60px, 0) scale(1.15);
+      }
+
       100% {
-        transform: translate(-45%, -55%) scale(1.35);
+        transform: translate3d(-60px, 120px, 0) scale(.95);
       }
     }
 
-    @keyframes gridMove {
+
+    /* =====================================================
+       BLURRY CLOUDS
+    ===================================================== */
+
+    .cloud {
+      position: absolute;
+
+      width: 420px;
+      height: 130px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(255,255,255,.07),
+          rgba(255,255,255,.015),
+          transparent 70%
+        );
+
+      filter: blur(35px);
+
+      opacity: .65;
+
+      animation:
+        cloudMove 38s linear infinite;
+    }
+
+    .cloud-one {
+      top: 13%;
+      left: -500px;
+    }
+
+    .cloud-two {
+      top: 42%;
+      left: -650px;
+      width: 560px;
+      height: 150px;
+      animation-duration: 48s;
+      animation-delay: -15s;
+    }
+
+    .cloud-three {
+      top: 70%;
+      left: -500px;
+      width: 360px;
+      animation-duration: 42s;
+      animation-delay: -25s;
+    }
+
+    @keyframes cloudMove {
+
+      from {
+        transform:
+          translateX(0)
+          scale(1);
+      }
+
+      to {
+        transform:
+          translateX(150vw)
+          scale(1.25);
+      }
+    }
+
+
+    /* =====================================================
+       MOVING WAVES
+    ===================================================== */
+
+    .wave {
+      position: absolute;
+
+      width: 170%;
+      height: 300px;
+
+      left: -35%;
+      bottom: -150px;
+
+      border-radius: 50%;
+
+      filter: blur(35px);
+
+      opacity: .2;
+
+      transform-origin: center;
+
+      animation:
+        waveMove 13s ease-in-out infinite alternate;
+    }
+
+    .wave-one {
+      background:
+        linear-gradient(
+          90deg,
+          #6655ff,
+          #00bfff,
+          #9c4dff
+        );
+    }
+
+    .wave-two {
+      bottom: -195px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #00bfff,
+          #6655ff,
+          #ff4ecd
+        );
+
+      animation-duration: 17s;
+      animation-delay: -5s;
+    }
+
+    .wave-three {
+      bottom: -240px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ff4ecd,
+          #6655ff,
+          #00bfff
+        );
+
+      animation-duration: 21s;
+      animation-delay: -9s;
+    }
+
+    @keyframes waveMove {
+
+      0% {
+        transform:
+          translateX(-4%)
+          rotate(-2deg)
+          scaleY(.9);
+      }
+
+      50% {
+        transform:
+          translateX(4%)
+          rotate(2deg)
+          scaleY(1.2);
+      }
+
+      100% {
+        transform:
+          translateX(-2%)
+          rotate(-1deg)
+          scaleY(1);
+      }
+    }
+
+
+    /* =====================================================
+       FLOATING PARTICLES
+    ===================================================== */
+
+    .stars {
+      position: absolute;
+      inset: 0;
+
+      opacity: .18;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.8) 1px,
+          transparent 1px
+        );
+
+      background-size: 90px 90px;
+
+      animation:
+        starsMove 22s linear infinite;
+    }
+
+    @keyframes starsMove {
+
       from {
         transform: translateY(0);
       }
+
       to {
-        transform: translateY(70px);
+        transform: translateY(-90px);
       }
     }
 
-    /* =========================
+
+    /* =====================================================
+       FILM GRAIN
+    ===================================================== */
+
+    .film-grain {
+      position: absolute;
+      inset: 0;
+
+      opacity: .025;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+    }
+
+
+    /* =====================================================
+       CURSOR GLOW
+    ===================================================== */
+
+    .cursor-glow {
+      position: fixed;
+
+      width: 320px;
+      height: 320px;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      z-index: 999;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(70, 170, 255, .13),
+          transparent 65%
+        );
+
+      transform:
+        translate(-50%, -50%);
+
+      mix-blend-mode: screen;
+
+      transition:
+        left .08s linear,
+        top .08s linear;
+        opacity: .8;
+    }
+
+
+    /* =====================================================
        NAVBAR
-    ========================= */
+    ===================================================== */
 
     nav {
       position: fixed;
+
       top: 0;
       left: 0;
+
       width: 100%;
+
       padding: 25px 7%;
+
       display: flex;
+
       justify-content: space-between;
       align-items: center;
+
       z-index: 100;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,.8),
-        transparent
-      );
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,.75),
+          transparent
+        );
+
       transition: .4s ease;
     }
 
     nav.scrolled {
       padding-top: 16px;
       padding-bottom: 16px;
-      background: rgba(7,7,7,.8);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(255,255,255,.06);
+
+      background:
+        rgba(5,5,10,.72);
+
+      backdrop-filter: blur(18px);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.06);
     }
 
     .logo {
       font-weight: 700;
       font-size: 18px;
       letter-spacing: -1px;
-      transition: .3s;
+
+      transition: .4s;
     }
 
     .logo:hover {
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
 
     nav .links {
       display: flex;
       gap: 30px;
+
       font-size: 13px;
+
       color: #aaa;
     }
 
     nav .links a {
       position: relative;
+
       transition: .3s;
     }
 
     nav .links a::after {
       content: "";
+
       position: absolute;
+
       width: 0;
       height: 1px;
+
       bottom: -6px;
       left: 0;
-      background: white;
+
+      background:
+        linear-gradient(
+          90deg,
+          #6b5cff,
+          #00c8ff
+        );
+
       transition: .3s;
     }
 
@@ -151,64 +456,130 @@
       width: 100%;
     }
 
-    /* =========================
+
+    /* =====================================================
        HERO
-    ========================= */
+    ===================================================== */
 
     .hero {
       min-height: 100vh;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       text-align: center;
-      padding: 100px 20px 60px;
+
+      padding:
+        100px 20px 60px;
+
       position: relative;
+
       background:
         radial-gradient(
-          circle at 50% 40%,
-          #202020 0%,
-          #070707 45%
+          circle at 50% 45%,
+          rgba(35,35,65,.45),
+          transparent 48%
         );
     }
 
     .hero-content {
       max-width: 850px;
-      animation: heroIn 1.2s cubic-bezier(.16,1,.3,1) forwards;
+
+      animation:
+        heroIn 1.2s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
     }
 
     .eyebrow {
-      color: #888;
+      color: #9c9ca8;
+
       font-size: 12px;
+
       letter-spacing: 4px;
+
       text-transform: uppercase;
+
       margin-bottom: 30px;
-      animation: fadeUp 1s .15s both;
+
+      animation:
+        fadeUp 1s .15s both;
     }
 
     h1 {
-      font-size: clamp(60px, 12vw, 150px);
+      font-size:
+        clamp(60px, 12vw, 150px);
+
       line-height: .85;
+
       letter-spacing: -7px;
+
       margin-bottom: 35px;
-      animation: titleReveal 1.3s .25s both;
+
+      animation:
+        titleReveal 1.3s .25s both;
+
+      text-shadow:
+        0 0 60px rgba(100,100,255,.08);
     }
 
     .serif {
-      font-family: "Playfair Display", serif;
+      font-family:
+        "Playfair Display",
+        serif;
+
       font-style: italic;
+
       font-weight: 500;
     }
 
     h1 .serif {
       display: inline-block;
-      animation: dotFloat 3s ease-in-out infinite;
+
+      background:
+        linear-gradient(
+          120deg,
+          #ffffff,
+          #9d8cff,
+          #75dfff,
+          #ffffff
+        );
+
+      background-size: 250% auto;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+
+      animation:
+        dotFloat 3s ease-in-out infinite,
+        gradientText 6s linear infinite;
+    }
+
+    @keyframes gradientText {
+
+      0% {
+        background-position: 0% center;
+      }
+
+      100% {
+        background-position: 250% center;
+      }
     }
 
     .subtitle {
       color: #999;
-      font-size: clamp(18px, 3vw, 25px);
+
+      font-size:
+        clamp(18px, 3vw, 25px);
+
       margin-bottom: 20px;
-      animation: fadeUp 1s .45s both;
+
+      animation:
+        fadeUp 1s .45s both;
     }
 
     .subtitle .serif {
@@ -217,789 +588,858 @@
 
     .description {
       max-width: 520px;
+
       margin: auto;
-      color: #777;
+
+      color: #858590;
+
       line-height: 1.7;
+
       font-size: 14px;
-      animation: fadeUp 1s .6s both;
+
+      animation:
+        fadeUp 1s .6s both;
     }
+
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
 
     .buttons {
       margin-top: 40px;
+
       display: flex;
+
       justify-content: center;
+
       gap: 15px;
+
       flex-wrap: wrap;
-      animation: fadeUp 1s .75s both;
+
+      animation:
+        fadeUp 1s .75s both;
     }
 
     .btn {
       position: relative;
-      padding: 15px 27px;
+
+      padding:
+        15px 27px;
+
       border-radius: 50px;
-      border: 1px solid #333;
+
+      border:
+        1px solid rgba(255,255,255,.16);
+
       transition:
         transform .3s ease,
         border-color .3s ease,
         box-shadow .3s ease;
+
       font-size: 13px;
+
       overflow: hidden;
+
+      background:
+        rgba(255,255,255,.025);
+
+      backdrop-filter: blur(10px);
     }
 
     .btn::before {
       content: "";
+
       position: absolute;
+
       inset: 0;
-      background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.35),
-        transparent
-      );
-      transform: translateX(-120%);
+
+      background:
+        linear-gradient(
+          120deg,
+          transparent,
+          rgba(255,255,255,.4),
+          transparent
+        );
+
+      transform:
+        translateX(-120%);
+
       transition: .6s;
     }
 
     .btn:hover::before {
-      transform: translateX(120%);
+      transform:
+        translateX(120%);
     }
 
     .btn.primary {
       background: white;
+
       color: black;
+
       border-color: white;
-      box-shadow: 0 0 0 rgba(255,255,255,0);
+
+      box-shadow:
+        0 0 30px
+        rgba(130,120,255,.08);
     }
 
     .btn.primary:hover {
-      box-shadow: 0 10px 40px rgba(255,255,255,.15);
+      box-shadow:
+        0 10px 45px
+        rgba(120,150,255,.25);
     }
 
     .btn:hover {
-      transform: translateY(-5px) scale(1.03);
-      border-color: white;
+      border-color: rgba(150,190,255,.7);
     }
+
+
+    /* =====================================================
+       SCROLL INDICATOR
+    ===================================================== */
 
     .scroll {
       position: absolute;
+
       bottom: 30px;
       left: 50%;
-      transform: translateX(-50%);
-      color: #555;
+
+      transform:
+        translateX(-50%);
+
+      color: #666;
+
       font-size: 10px;
+
       letter-spacing: 3px;
-      animation: scrollBounce 2s ease-in-out infinite;
+
+      animation:
+        scrollBounce 2s ease-in-out infinite;
     }
 
     @keyframes scrollBounce {
+
       0%,100% {
-        transform: translate(-50%,0);
+        transform:
+          translate(-50%,0);
+
         opacity: .5;
       }
+
       50% {
-        transform: translate(-50%,8px);
+        transform:
+          translate(-50%,8px);
+
         opacity: 1;
       }
     }
 
-    /* =========================
+
+    /* =====================================================
        SECTIONS
-    ========================= */
+    ===================================================== */
 
     section:not(.hero) {
-      padding: 120px 7%;
+      padding:
+        120px 7%;
     }
 
     .section-label {
-      color: #666;
+      color: #72727c;
+
       font-size: 11px;
+
       letter-spacing: 3px;
+
       text-transform: uppercase;
+
       margin-bottom: 25px;
     }
 
     .section-title {
-      font-size: clamp(40px, 7vw, 80px);
+      font-size:
+        clamp(40px, 7vw, 80px);
+
       letter-spacing: -4px;
+
       margin-bottom: 60px;
     }
 
-    /* =========================
+
+    /* =====================================================
        PROJECTS
-    ========================= */
+    ===================================================== */
 
     .projects {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
       gap: 25px;
     }
 
     .project {
       min-height: 380px;
-      border: 1px solid #191919;
-      border-radius: 18px;
+
+      border:
+        1px solid rgba(255,255,255,.08);
+
+      border-radius: 20px;
+
       padding: 35px;
+
       display: flex;
+
       flex-direction: column;
+
       justify-content: flex-end;
+
       background:
-        linear-gradient(145deg, #171717, #090909);
+        linear-gradient(
+          145deg,
+          rgba(30,30,45,.7),
+          rgba(7,7,12,.8)
+        );
+
+      backdrop-filter:
+        blur(12px);
+
       transition:
-        transform .5s cubic-bezier(.16,1,.3,1),
+        transform .5s
+        cubic-bezier(.16,1,.3,1),
+
         border-color .4s,
+
         box-shadow .4s;
+
       overflow: hidden;
+
       position: relative;
     }
 
     .project::before {
       content: "";
+
       position: absolute;
-      width: 250px;
-      height: 250px;
+
+      width: 300px;
+      height: 300px;
+
       border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(255,255,255,.12),
-        transparent 70%
-      );
-      top: -100px;
-      right: -100px;
-      transition: .6s;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(90,120,255,.22),
+          transparent 70%
+        );
+
+      top: -130px;
+      right: -130px;
+
       opacity: 0;
+
+      transition: .6s;
+    }
+
+    .project::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          120deg,
+          transparent 20%,
+          rgba(255,255,255,.035),
+          transparent 80%
+        );
+
+      transform:
+        translateX(-100%);
+
+      transition:
+        transform .8s;
     }
 
     .project:hover::before {
       opacity: 1;
-      transform: scale(1.4);
+
+      transform:
+        scale(1.4);
+    }
+
+    .project:hover::after {
+      transform:
+        translateX(100%);
     }
 
     .project:hover {
-      transform: translateY(-10px) scale(1.015);
-      border-color: #444;
-      box-shadow: 0 25px 70px rgba(0,0,0,.5);
+      border-color:
+        rgba(130,160,255,.35);
+
+      box-shadow:
+        0 30px 90px
+        rgba(0,0,0,.55),
+        0 0 50px
+        rgba(70,100,255,.06);
     }
 
     .project-number {
       color: #555;
+
       font-size: 12px;
+
       margin-bottom: auto;
+
       transition: .3s;
     }
 
     .project:hover .project-number {
-      color: #aaa;
-      transform: translateX(5px);
+      color: #9c9cff;
+
+      transform:
+        translateX(5px);
     }
 
     .project h3 {
       font-size: 32px;
+
       margin-bottom: 10px;
+
       transition: .4s;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .project:hover h3 {
-      transform: translateX(6px);
+      transform:
+        translateX(6px);
     }
 
     .project p {
       color: #777;
+
       font-size: 13px;
+
       line-height: 1.6;
+
       transition: .4s;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .project:hover p {
       color: #aaa;
     }
 
-    /* =========================
+
+    /* =====================================================
        ABOUT
-    ========================= */
+    ===================================================== */
 
     .about {
       max-width: 850px;
     }
 
     .about p {
-      font-size: clamp(25px, 4vw, 45px);
+      font-size:
+        clamp(25px, 4vw, 45px);
+
       line-height: 1.25;
+
       color: #888;
+
       letter-spacing: -1px;
     }
 
     .about strong {
       color: white;
+
       transition: .3s;
     }
 
     .about strong:hover {
-      text-shadow: 0 0 30px rgba(255,255,255,.3);
+      text-shadow:
+        0 0 30px
+        rgba(120,150,255,.4);
     }
 
-    /* =========================
+
+    /* =====================================================
        SERVICES
-    ========================= */
+    ===================================================== */
 
     .services {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 15px;
     }
 
     .service {
       padding: 35px;
-      border: 1px solid #1b1b1b;
-      border-radius: 15px;
-      background: #0b0b0b;
+
+      border:
+        1px solid rgba(255,255,255,.07);
+
+      border-radius: 18px;
+
+      background:
+        rgba(10,10,18,.65);
+
+      backdrop-filter:
+        blur(12px);
+
       transition:
-        transform .5s cubic-bezier(.16,1,.3,1),
+        transform .5s
+        cubic-bezier(.16,1,.3,1),
+
         border-color .4s,
+
         background .4s;
+
       position: relative;
+
       overflow: hidden;
     }
 
     .service::after {
       content: "";
+
       position: absolute;
-      width: 100px;
-      height: 100px;
+
+      width: 120px;
+      height: 120px;
+
       border-radius: 50%;
-      background: rgba(255,255,255,.06);
-      top: -50px;
-      right: -50px;
-      transition: .5s;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(80,150,255,.16),
+          transparent 70%
+        );
+
+      top: -60px;
+      right: -60px;
+
+      transition: .6s;
     }
 
     .service:hover {
-      transform: translateY(-8px);
-      border-color: #444;
-      background: #101010;
+      transform:
+        translateY(-10px);
+
+      border-color:
+        rgba(100,150,255,.3);
+
+      background:
+        rgba(20,20,32,.75);
+
+      box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.3);
     }
 
     .service:hover::after {
-      transform: scale(2.5);
+      transform:
+        scale(2.5);
     }
 
     .service h3 {
       margin-bottom: 15px;
+
       position: relative;
+
       z-index: 1;
     }
 
     .service p {
       color: #777;
+
       font-size: 13px;
+
       line-height: 1.6;
+
       position: relative;
+
       z-index: 1;
     }
 
-    /* =========================
+
+    /* =====================================================
        CONTACT
-    ========================= */
+    ===================================================== */
 
     .contact {
       text-align: center;
+
       min-height: 70vh;
+
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
       align-items: center;
+
       background:
-        radial-gradient(circle, #181818, #070707 55%);
+        radial-gradient(
+          circle,
+          rgba(30,35,70,.5),
+          transparent 60%
+        );
+
       position: relative;
+
+      overflow: hidden;
     }
 
     .contact::before {
       content: "";
+
       position: absolute;
+
       width: 350px;
       height: 350px;
+
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.04);
-      animation: contactOrb 8s linear infinite;
+
+      border:
+        1px solid
+        rgba(120,140,255,.12);
+
+      box-shadow:
+        0 0 100px
+        rgba(70,100,255,.08);
+
+      animation:
+        contactOrb 8s linear infinite;
     }
 
     .contact h2 {
-      font-size: clamp(45px, 9vw, 100px);
+      font-size:
+        clamp(45px, 9vw, 100px);
+
       letter-spacing: -5px;
+
       margin-bottom: 25px;
+
       position: relative;
+
       z-index: 1;
     }
 
     .contact p {
       color: #777;
+
       margin-bottom: 35px;
+
       position: relative;
+
       z-index: 1;
     }
 
     .contact .btn {
       position: relative;
+
       z-index: 2;
     }
 
     @keyframes contactOrb {
+
       0% {
-        transform: scale(.8) rotate(0deg);
+        transform:
+          scale(.8)
+          rotate(0deg);
+
         opacity: .3;
       }
+
       50% {
-        transform: scale(1.15) rotate(180deg);
+        transform:
+          scale(1.15)
+          rotate(180deg);
+
         opacity: .7;
       }
+
       100% {
-        transform: scale(.8) rotate(360deg);
+        transform:
+          scale(.8)
+          rotate(360deg);
+
         opacity: .3;
       }
     }
 
-    /* =========================
+
+    /* =====================================================
        FOOTER
-    ========================= */
+    ===================================================== */
 
     footer {
-      padding: 30px 7%;
-      border-top: 1px solid #151515;
+      padding:
+        30px 7%;
+
+      border-top:
+        1px solid rgba(255,255,255,.06);
+
       color: #555;
+
       font-size: 12px;
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
     }
 
-    /* =========================
+
+    /* =====================================================
        SCROLL REVEAL
-    ========================= */
+    ===================================================== */
 
     .reveal {
       opacity: 0;
-      transform: translateY(50px);
+
+      transform:
+        translateY(50px);
+
       transition:
         opacity .9s ease,
-        transform .9s cubic-bezier(.16,1,.3,1);
+
+        transform .9s
+        cubic-bezier(.16,1,.3,1);
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+
+      transform:
+        translateY(0);
     }
 
-    /* =========================
-       GENERAL ANIMATIONS
-    ========================= */
-
-    @keyframes heroIn {
-      from {
-        opacity: 0;
-        transform: translateY(35px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes titleReveal {
-      from {
-        opacity: 0;
-        transform: translateY(60px) scale(.95);
-        filter: blur(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(25px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes dotFloat {
-      0%,100% {
-        transform: translateY(0) rotate(0);
-      }
-
-      50% {
-        transform: translateY(-10px) rotate(5deg);
-      }
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 700px) {
-
-      nav {
-        padding: 20px;
-      }
-
-      nav .links {
-        gap: 15px;
-      }
-
-      .projects,
-      .services {
-        grid-template-columns: 1fr;
-      }
-
-      section:not(.hero) {
-        padding: 90px 20px;
-      }
-
-      h1 {
-        letter-spacing: -4px;
-      }
-
-      footer {
-        padding: 25px 20px;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .project {
-        min-height: 330px;
-      }
-
-      body::before {
-        width: 300px;
-        height: 300px;
-      }
-    }
-
-    /* =========================
-       REDUCED MOTION
-    ========================= */
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style></head><body>  <!-- NAVIGATION -->  <nav id="navbar">
-    <div class="logo">USMAN.</div><div class="links">
-  <a href="#work">Work</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-</div>
-
-  </nav>  <!-- HERO -->  <section class="hero" id="home"><div class="hero-content">
-
-  <div class="eyebrow">
-    Web Designer • Creative
-  </div>
-
-  <h1>
-    Usman<span class="serif">.</span>
-  </h1>
-
-  <div class="subtitle">
-    I create <span class="serif">web experiences</span>.
-  </div>
-
-  <p class="description">
-    I design modern, responsive websites for brands,
-    creators and businesses that want to stand out online.
-  </p>
-
-  <div class="buttons">
-    <a href="#work" class="btn primary magnetic">
-      View my work
-    </a>
-
-    <a href="#contact" class="btn magnetic">
-      Let's talk
-    </a>
-  </div>
 
-</div>
-
-<div class="scroll">
-  SCROLL ↓
-</div>
-
-  </section>  <!-- WORK -->  <section id="work"><div class="section-label reveal">
-  01 — Selected Work
-</div>
-
-<h2 class="section-title reveal">
-  Things I've <span class="serif">built.</span>
-</h2>
-
-<div class="projects">
-
-  <a
-    href="https://usmaan19-vi.github.io/bakershubcom/"
-    class="project reveal"
-    target="_blank"
-  >
-    <div class="project-number">01</div>
-
-    <h3>Bakery</h3>
-
-    <p>
-      A premium website concept for a modern bakery
-      and café.
-    </p>
-  </a>
-
-
-  <a
-    href="https://hotel-mehak.vercel.app"
-    class="project reveal"
-    target="_blank"
-  >
-    <div class="project-number">02</div>
-
-    <h3>Business</h3>
-
-    <p>
-      A professional landing page designed to turn
-      visitors into customers.
-    </p>
-  </a>
-
-
-  <div class="project reveal">
-    <div class="project-number">03</div>
-
-    <h3>Restaurant</h3>
-
-    <p>
-      A modern digital menu and restaurant experience
-      designed for mobile customers.
-    </p>
-  </div>
-
-
-  <div class="project reveal">
-    <div class="project-number">04</div>
-
-    <h3>Portfolio</h3>
-
-    <p>
-      A creative portfolio concept for artists and
-      creators.
-    </p>
-  </div>
-
-</div>
-
-  </section>  <!-- ABOUT -->  <section id="about"><div class="section-label reveal">
-  02 — About
-</div>
-
-<div class="about reveal">
-
-  <p>
-    I'm <strong>Usman</strong>, a young creative
-    learning to turn ideas into
-    <strong>beautiful websites</strong>.
-    I focus on clean design, strong visuals
-    and memorable digital experiences.
-  </p>
+    /* ===================================================
+    
+    const revealElements =
+      document.querySelectorAll(
+        ".reveal"
+      );
 
-</div>
+    const revealObserver =
+      new IntersectionObserver(
 
-  </section>  <!-- SERVICES -->  <section><div class="section-label reveal">
-  03 — What I Do
-</div>
+        (entries) => {
 
-<h2 class="section-title reveal">
-  My <span class="serif">services.</span>
-</h2>
+          entries.forEach(
+            (entry) => {
 
-<div class="services">
+              if (
+                entry.isIntersecting
+              ) {
 
-  <div class="service reveal">
-    <h3>Web Design</h3>
-    <p>
-      Modern and responsive websites designed
-      around your brand.
-    </p>
-  </div>
+                entry.target.classList.add(
+                  "visible"
+                );
 
-  <div class="service reveal">
-    <h3>Landing Pages</h3>
-    <p>
-      High-quality landing pages designed to
-      present products and businesses.
-    </p>
-  </div>
+                revealObserver.unobserve(
+                  entry.target
+                );
 
-  <div class="service reveal">
-    <h3>Creative Design</h3>
-    <p>
-      Visual layouts, typography and digital
-      experiences that feel unique.
-    </p>
-  </div>
+              }
 
-</div>
+            }
+          );
 
-  </section>  <!-- CONTACT -->  <section class="contact" id="contact"><div class="section-label reveal">
-  04 — Contact
-</div>
+        },
 
-<h2 class="reveal">
-  Let's create <span class="serif">something.</span>
-</h2>
+        {
+          threshold: .12
+        }
 
-<p class="reveal">
-  Have a project in mind?
-</p>
+      );
 
-<a
-  href="mailto:shahusm3@gmail.com"
-  class="btn primary magnetic reveal"
->
-  Get in touch →
-</a>
 
-  </section>  <!-- FOOTER -->  <footer>
-    <span>© 2026 Usman</span>
-    <span>Designed & built by Usman.</span>
-  </footer>  <!-- =========================
-       JAVASCRIPT
-  ========================= -->  <script>
+    revealElements.forEach(
+      (element) => {
 
-    /* NAVBAR SCROLL EFFECT */
+        revealObserver.observe(
+          element
+        );
 
-    const navbar = document.getElementById("navbar");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add("scrolled");
-      } else {
-        navbar.classList.remove("scrolled");
-      }
-    });
-
-
-    /* SCROLL REVEAL */
-
-    const revealElements = document.querySelectorAll(".reveal");
-
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-
-        entries.forEach((entry) => {
-
-          if (entry.isIntersecting) {
-
-            entry.target.classList.add("visible");
-
-            revealObserver.unobserve(entry.target);
-
-          }
-
-        });
-
-      },
-      {
-        threshold: 0.12
       }
     );
 
-    revealElements.forEach((element) => {
-      revealObserver.observe(element);
-    });
+
+    /* =====================================================
+       CURSOR GLOW
+    ===================================================== */
+
+    const cursorGlow =
+      document.querySelector(
+        ".cursor-glow"
+      );
 
 
-    /* MAGNETIC BUTTONS */
+    document.addEventListener(
+      "mousemove",
+      (event) => {
 
-    const magneticButtons = document.querySelectorAll(".magnetic");
+        cursorGlow.style.left =
+          event.clientX + "px";
 
-    magneticButtons.forEach((button) => {
+        cursorGlow.style.top =
+          event.clientY + "px";
 
-      button.addEventListener("mousemove", (event) => {
-
-        const rect = button.getBoundingClientRect();
-
-        const x =
-          event.clientX -
-          rect.left -
-          rect.width / 2;
-
-        const y =
-          event.clientY -
-          rect.top -
-          rect.height / 2;
-
-        button.style.transform =
-          `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.04)`;
-
-      });
-
-      button.addEventListener("mouseleave", () => {
-
-        button.style.transform = "";
-
-      });
-
-    });
+      }
+    );
 
 
-    /* PROJECT CARD MOUSE TILT */
+    /* =====================================================
+       MAGNETIC BUTTONS
+    ===================================================== */
 
-    const projects = document.querySelectorAll(".project");
+    const magneticButtons =
+      document.querySelectorAll(
+        ".magnetic"
+      );
 
-    projects.forEach((project) => {
 
-      project.addEventListener("mousemove", (event) => {
+    magneticButtons.forEach(
+      (button) => {
 
-        if (window.innerWidth < 700) return;
+        button.addEventListener(
+          "mousemove",
+          (event) => {
 
-        const rect = project.getBoundingClientRect();
+            if (
+              window.innerWidth < 700
+            ) return;
 
-        const x =
-          event.clientX - rect.left;
+            const rect =
+              button.getBoundingClientRect();
 
-        const y =
-          event.clientY - rect.top;
+            const x =
+              event.clientX -
+              rect.left -
+              rect.width / 2;
 
-        const rotateY =
-          ((x / rect.width) - 0.5) * 5;
+            const y =
+              event.clientY -
+              rect.top -
+              rect.height / 2;
 
-        const rotateX =
-          ((y / rect.height) - 0.5) * -5;
+            button.style.transform =
+              `translate(
+                ${x * .15}px,
+                ${y * .15}px
+              ) scale(1.04)`;
 
-        project.style.transform =
-          `perspective(900px)
-           rotateX(${rotateX}deg)
-           rotateY(${rotateY}deg)
-           translateY(-10px)
-           scale(1.015)`;
+          }
+        );
 
-      });
 
-      project.addEventListener("mouseleave", () => {
+        button.addEventListener(
+          "mouseleave",
+          () => {
 
-        project.style.transform = "";
+            button.style.transform =
+              "";
 
-      });
+          }
+        );
 
-    });
+      }
+    );
 
-  </script></body>
+
+    /* =====================================================
+       PROJECT CARD 3D TILT
+    ===================================================== */
+
+    const projects =
+      document.querySelectorAll(
+        ".project"
+      );
+
+
+    projects.forEach(
+      (project) => {
+
+        project.addEventListener(
+          "mousemove",
+          (event) => {
+
+            if (
+              window.innerWidth < 700
+            ) return;
+
+            const rect =
+              project.getBoundingClientRect();
+
+            const x =
+              event.clientX -
+              rect.left;
+
+            const y =
+              event.clientY -
+              rect.top;
+
+            const rotateY =
+              (
+                (x / rect.width) -
+                .5
+              ) * 5;
+
+            const rotateX =
+              (
+                (y / rect.height) -
+                .5
+              ) * -5;
+
+
+            project.style.transform =
+              `perspective(900px)
+               rotateX(${rotateX}deg)
+               rotateY(${rotateY}deg)
+               translateY(-10px)
+               scale(1.015)`;
+
+          }
+        );
+
+
+        project.addEventListener(
+          "mouseleave",
+          () => {
+
+            project.style.transform =
+              "";
+
+          }
+        );
+
+      }
+    );
+
+
+  </script>
+
+
+</body>
 </html>
