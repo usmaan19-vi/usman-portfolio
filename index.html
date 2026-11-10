@@ -9,7 +9,162 @@
 <meta property="og:description" content="I create web experiences that people remember.">
 <meta property="og:type" content="website">
 <title>Usman — Web Designer</title>
+<style>
+/* ===== INTERACTIVE HERO AVATAR ===== */
 
+.hero > .container {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 35px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.hero-art {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 10px;
+  isolation: isolate;
+}
+
+.avatar-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 350px;
+  padding: 18px 18px 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 28px;
+  background: linear-gradient(145deg,
+    rgba(255,255,255,.11),
+    rgba(255,255,255,.025));
+  box-shadow: 0 25px 80px rgba(0,0,0,.3),
+              inset 0 1px rgba(255,255,255,.12);
+  backdrop-filter: blur(18px);
+}
+
+.avatar-label,
+.avatar-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(255,255,255,.7);
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.avatar-label span {
+  color: #a995ff;
+  font-size: 20px;
+}
+
+#stretchAvatar {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+#stretchAvatar:active {
+  cursor: grabbing;
+}
+
+.avatar-caption {
+  padding: 10px 2px 0;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.avatar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #7cffb2;
+  box-shadow: 0 0 12px #7cffb2;
+}
+
+.avatar-hint {
+  position: relative;
+  z-index: 2;
+  margin-top: 18px;
+  color: rgba(255,255,255,.55);
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+
+.avatar-orbit {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgba(157,130,255,.25);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orbit-one {
+  width: 370px;
+  height: 370px;
+  animation: avatarOrbit 18s linear infinite;
+}
+
+.orbit-two {
+  width: 420px;
+  height: 420px;
+  border-style: dashed;
+  opacity: .5;
+  animation: avatarOrbit 28s linear infinite reverse;
+}
+
+@keyframes avatarOrbit {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 900px) {
+  .hero > .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero-art {
+    max-width: 390px;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-card {
+    max-width: 300px;
+  }
+
+  .orbit-one {
+    width: 310px;
+    height: 310px;
+  }
+
+  .orbit-two {
+    width: 340px;
+    height: 340px;
+  }
+}
+ </style>  
 <style>
 /* =====================================================
    TOKENS
@@ -31,7 +186,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg);scroll-padding-top:80px}
-body{
+body}
   font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
   background:var(--bg);color:var(--text);line-height:1.6;
   overflow-x:hidden;-webkit-font-smoothing:antialiased;
@@ -463,11 +618,79 @@ footer{padding:30px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
             and turn visitors into customers.
           </p>
 
+<div class="hero-art" id="heroArt">
+  <div class="avatar-orbit orbit-one"></div>
+  <div class="avatar-orbit orbit-two"></div>
+
+  <div class="avatar-card">
+    <div class="avatar-label">CREATIVE MIND <span>✦</span></div>
+
+    <svg id="stretchAvatar" viewBox="0 0 320 390"
+         xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f8c9a8"/>
+          <stop offset="100%" stop-color="#c98268"/>
+        </linearGradient>
+        <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#9a83ff"/>
+          <stop offset="100%" stop-color="#5544bd"/>
+        </linearGradient>
+        <filter id="faceStretch">
+          <feTurbulence id="avatarNoise" type="fractalNoise"
+            baseFrequency="0.012" numOctaves="2" seed="5"/>
+          <feDisplacementMap in="SourceGraphic" scale="0"
+            xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+
+      <ellipse cx="160" cy="365" rx="115" ry="18" fill="#8b75ff" opacity=".15"/>
+      <path d="M55 390 Q62 275 160 275 Q258 275 265 390Z" fill="url(#shirt)"/>
+      <path d="M126 270 L160 315 L194 270" fill="#f0b596"/>
+
+      <g id="avatarFace" filter="url(#faceStretch)">
+        <path d="M89 139 Q76 38 160 35 Q245 35 231 139
+          L225 226 Q215 293 160 300 Q105 293 95 226Z"
+          fill="url(#skin)"/>
+
+        <path d="M87 148 Q65 80 106 44 Q140 10 192 30
+          Q247 45 237 131 L222 116 Q222 67 178 62
+          Q130 50 103 106 L99 155Z" fill="#24202b"/>
+
+        <path d="M108 163 Q127 147 146 162"
+          stroke="#30232a" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M175 162 Q195 147 213 163"
+          stroke="#30232a" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+        <ellipse cx="130" cy="184" rx="9" ry="12" fill="#30232a"/>
+        <ellipse cx="190" cy="184" rx="9" ry="12" fill="#30232a"/>
+        <circle cx="133" cy="180" r="3" fill="white"/>
+        <circle cx="193" cy="180" r="3" fill="white"/>
+
+        <path d="M160 185 L150 220 Q160 228 170 220"
+          fill="none" stroke="#a96755" stroke-width="4" stroke-linecap="round"/>
+        <path d="M139 251 Q160 267 181 251"
+          fill="none" stroke="#873e4b" stroke-width="5" stroke-linecap="round"/>
+
+        <ellipse cx="111" cy="223" rx="15" ry="8" fill="#e99588" opacity=".35"/>
+        <ellipse cx="209" cy="223" rx="15" ry="8" fill="#e99588" opacity=".35"/>
+      </g>
+    </svg>
+
+    <div class="avatar-caption">
+      <span>DESIGNER / DEVELOPER</span>
+      <span class="avatar-dot"></span>
+    </div>
+  </div>
+  <div class="avatar-hint">↔ DRAG TO PLAY</div>
+</div>
+           
           <div class="buttons">
             <a href="#work" class="btn primary">View My Work →</a>
             <a href="#contact" class="btn secondary">Let's Work Together</a>
           </div>
         </div>
+   
       </div>
       <div class="scroll-hint" aria-hidden="true"></div>
     </section>
@@ -881,6 +1104,40 @@ window.addEventListener("load", () => setTimeout(() => $("#loader").classList.ad
   });
 
   size(); frame();
+})();
+</script>
+<script>
+(() => {
+  const svg = document.getElementById('stretchAvatar');
+  const face = document.getElementById('avatarFace');
+  if (!svg || !face) return;
+
+  let dragging = false;
+  let startX = 0;
+
+  svg.addEventListener('pointerdown', e => {
+    dragging = true;
+    startX = e.clientX;
+    svg.setPointerCapture(e.pointerId);
+  });
+
+  svg.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const amount = Math.max(-65, Math.min(65, e.clientX - startX));
+    const scale = 1 + Math.abs(amount) / 180;
+    face.setAttribute(
+      'transform',
+      `translate(${amount * .25},0) translate(160,0) scale(${scale},1) translate(-160,0)`
+    );
+  });
+
+  function reset() {
+    dragging = false;
+    face.setAttribute('transform', '');
+  }
+
+  svg.addEventListener('pointerup', reset);
+  svg.addEventListener('pointercancel', reset);
 })();
 </script>
 </body>
