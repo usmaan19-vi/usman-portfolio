@@ -1,0 +1,948 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080910" />
+  <meta name="description" content="A playful interactive corner of Usman's web design portfolio." />
+  <title>Usman — The Playground</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080910;
+      --panel: #11121d;
+      --text: #f5f3ff;
+      --muted: #9293a8;
+      --purple: #987bff;
+      --blue: #54c8ff;
+      --pink: #ff83b5;
+      --yellow: #ffd47b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(105, 77, 205, .16), transparent 35%),
+        radial-gradient(ellipse at 90% 85%, rgba(48, 155, 220, .12), transparent 35%),
+        var(--bg);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .16;
+      z-index: 0;
+      background-image: radial-gradient(rgba(255,255,255,.5) .6px, transparent .6px);
+      background-size: 25px 25px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1160px, calc(100% - 48px));
+      min-height: 100vh;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+    }
+
+    .logo span {
+      color: var(--purple);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav a {
+      transition: color .2s ease;
+    }
+
+    .nav a:hover {
+      color: white;
+    }
+
+    .back-link {
+      padding: 11px 17px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 30px;
+      color: white;
+    }
+
+    .back-link:hover {
+      border-color: var(--purple);
+      background: rgba(152,123,255,.1);
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 50px;
+      padding: 65px 0 75px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 13px;
+      border: 1px solid rgba(152,123,255,.25);
+      border-radius: 30px;
+      background: rgba(152,123,255,.08);
+      color: #c7b8ff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #80e5b0;
+      box-shadow: 0 0 12px #80e5b0;
+    }
+
+    h1 {
+      margin: 28px 0 20px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(48px, 6vw, 82px);
+      line-height: .99;
+      letter-spacing: -5px;
+    }
+
+    h1 .gradient {
+      display: block;
+      background: linear-gradient(100deg, #b39bff 10%, #70cfff 60%, #ff9ac5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      max-width: 470px;
+      color: #b6b6c8;
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .description {
+      max-width: 465px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 31px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 21px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s, background .2s, border-color .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: #0a0912;
+      background: linear-gradient(110deg, #b39bff, #79d4ff);
+      box-shadow: 0 8px 30px rgba(126,151,255,.2);
+    }
+
+    .button-secondary {
+      border: 1px solid rgba(255,255,255,.17);
+      color: white;
+      background: rgba(255,255,255,.03);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--purple);
+    }
+
+    .small-note {
+      margin-top: 28px;
+      color: #77788c;
+      font-size: 11px;
+      letter-spacing: .7px;
+    }
+
+    /* Interactive avatar area */
+
+    .art-area {
+      position: relative;
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .orb {
+      position: absolute;
+      width: min(420px, 90%);
+      aspect-ratio: 1;
+      border: 1px solid rgba(165,142,255,.17);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(152,123,255,.19), transparent 55%),
+        radial-gradient(circle at 70% 75%, rgba(84,200,255,.13), transparent 50%);
+      box-shadow: 0 0 100px rgba(123,100,255,.1);
+      animation: float 7s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .orb::before,
+    .orb::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .orb::before {
+      inset: 25px;
+    }
+
+    .orb::after {
+      inset: 55px;
+    }
+
+    .avatar-card {
+      position: relative;
+      width: min(340px, 80vw);
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(255,255,255,.11), rgba(255,255,255,.025));
+      box-shadow: 0 35px 100px rgba(0,0,0,.45);
+      backdrop-filter: blur(20px);
+      transform: rotate(-3deg);
+      transition: transform .35s ease;
+    }
+
+    .avatar-card:hover {
+      transform: rotate(0deg) translateY(-5px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 5px 14px;
+      color: #aaa9bd;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .card-top span:last-child {
+      color: #8cdbba;
+    }
+
+    .avatar-stage {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 50% 35%, #39305f, transparent 58%),
+        linear-gradient(145deg, #1c1b31, #101522);
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .avatar-stage:active {
+      cursor: grabbing;
+    }
+
+    #avatar {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    #face {
+      transform-origin: 200px 210px;
+      transition: transform .22s ease;
+    }
+
+    .avatar-stage.dragging #face {
+      transition: none;
+    }
+
+    #mouth {
+      transition: d .2s ease;
+    }
+
+    .sparkle {
+      position: absolute;
+      color: #e4d8ff;
+      font-size: 20px;
+      animation: twinkle 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .sparkle.one {
+      top: 48px;
+      left: 25px;
+    }
+
+    .sparkle.two {
+      top: 105px;
+      right: 23px;
+      color: #86dfff;
+      animation-delay: .8s;
+    }
+
+    .sparkle.three {
+      bottom: 42px;
+      left: 32px;
+      color: #ff9dc7;
+      animation-delay: 1.2s;
+    }
+
+    .drag-label {
+      padding: 14px 8px 3px;
+      text-align: center;
+      color: #aaa9bd;
+      font-size: 11px;
+    }
+
+    .drag-label strong {
+      color: white;
+    }
+
+    .floating-tag {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 14px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 14px;
+      background: rgba(20,20,34,.85);
+      box-shadow: 0 12px 35px rgba(0,0,0,.3);
+      backdrop-filter: blur(15px);
+      color: #dedbea;
+      font-size: 11px;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .tag-left {
+      top: 105px;
+      left: -15px;
+    }
+
+    .tag-right {
+      right: -5px;
+      bottom: 110px;
+      animation-delay: 1.5s;
+    }
+
+    .tag-icon {
+      font-size: 17px;
+    }
+
+    .meter {
+      width: min(340px, 80vw);
+      margin-top: 22px;
+      padding: 13px 16px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .meter-heading {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      color: #9b9bad;
+      font-size: 10px;
+    }
+
+    .meter-heading strong {
+      color: #c8b8ff;
+    }
+
+    .meter-track {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(255,255,255,.1);
+    }
+
+    .meter-fill {
+      width: 25%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #9a7cff, #61d4ff);
+      transition: width .15s ease;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,.09);
+      color: #737488;
+      font-size: 11px;
+    }
+
+    footer a {
+      color: #aaa6c5;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-13px); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: .4; transform: scale(.8) rotate(0); }
+      50% { opacity: 1; transform: scale(1.2) rotate(25deg); }
+    }
+
+    @media (max-width: 850px) {
+      main {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding-top: 60px;
+      }
+
+      .intro {
+        text-align: center;
+      }
+
+      .subtitle,
+      .description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
+      .art-area {
+        min-height: 490px;
+      }
+
+      .small-note {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .page {
+        width: min(100% - 32px, 440px);
+      }
+
+      header {
+        height: 75px;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .nav {
+        gap: 12px;
+        font-size: 11px;
+      }
+
+      .nav a:not(.back-link) {
+        display: none;
+      }
+
+      h1 {
+        font-size: 55px;
+        letter-spacing: -3.5px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .description {
+        font-size: 13px;
+      }
+
+      .art-area {
+        min-height: 440px;
+      }
+
+      .avatar-card {
+        width: min(310px, 83vw);
+      }
+
+      .tag-left {
+        left: -4px;
+      }
+
+      .tag-right {
+        right: -4px;
+      }
+
+      footer {
+        font-size: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header>
+      <a class="logo" href="./index.html">USMAN<span>.</span></a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="./index.html#work">Work</a>
+        <a href="./index.html#about">About</a>
+        <a class="back-link" href="./index.html">← Main portfolio</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow">
+          <span class="status-dot"></span>
+          A LITTLE EXPERIMENT
+        </div>
+
+        <h1>
+          HEY, I'M
+          <span class="gradient">USMAN.</span>
+        </h1>
+
+        <p class="subtitle">
+          I turn ideas into digital experiences.
+        </p>
+
+        <p class="description">
+          I design and build modern websites for businesses, brands and
+          creators. I care about the little details, smooth interactions
+          and making every project feel like it belongs to the people
+          behind it.
+        </p>
+
+        <div class="actions">
+          <a class="button button-primary" href="./index.html#work">
+            Explore my work <span>↗</span>
+          </a>
+
+          <a class="button button-secondary" href="./index.html#contact">
+            Let's talk <span>↗</span>
+          </a>
+        </div>
+
+        <p class="small-note">
+          DESIGN-MINDED · DETAIL-DRIVEN · ALWAYS LEARNING
+        </p>
+      </section>
+
+      <section class="art-area" aria-label="Interactive avatar playground">
+
+        <div class="orb"></div>
+
+        <div class="floating-tag tag-left">
+          <span class="tag-icon">✦</span>
+          Creative mode
+        </div>
+
+        <div class="floating-tag tag-right">
+          <span class="tag-icon">⚡</span>
+          Idea in progress
+        </div>
+
+        <div>
+          <div class="avatar-card">
+            <div class="card-top">
+              <span>Digital identity / 001</span>
+              <span>● Online</span>
+            </div>
+
+            <div class="avatar-stage" id="stage">
+              <span class="sparkle one">✧</span>
+              <span class="sparkle two">✦</span>
+              <span class="sparkle three">✳</span>
+
+              <svg id="avatar" viewBox="0 0 400 470"
+                   role="img" aria-label="A playful illustrated avatar">
+
+                <defs>
+                  <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#f8c7a7"/>
+                    <stop offset="100%" stop-color="#d99179"/>
+                  </linearGradient>
+
+                  <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#a18aff"/>
+                    <stop offset="100%" stop-color="#4c70c9"/>
+                  </linearGradient>
+
+                  <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#30233a"/>
+                    <stop offset="100%" stop-color="#120f1d"/>
+                  </linearGradient>
+
+                  <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="12"/>
+                  </filter>
+
+                  <filter id="warp">
+                    <feTurbulence type="fractalNoise"
+                      baseFrequency=".012" numOctaves="2"
+                      seed="3" result="noise"/>
+                    <feDisplacementMap in="SourceGraphic"
+                      in2="noise" scale="0"
+                      id="displacement"/>
+                  </filter>
+                </defs>
+
+                <ellipse cx="200" cy="422" rx="125" ry="18"
+                  fill="#000" opacity=".3" filter="url(#shadow)"/>
+
+                <circle cx="200" cy="220" r="165"
+                  fill="#8e78ff" opacity=".09"/>
+
+                <g id="face" filter="url(#warp)">
+
+                  <!-- Neck -->
+                  <path d="M160 305 L160 365 Q200 390 240 365 L240 305Z"
+                    fill="#cf8c76"/>
+
+                  <!-- Shirt -->
+                  <path d="M75 470 Q82 375 155 350
+                    Q200 390 245 350 Q320 375 325 470Z"
+                    fill="url(#shirt)"/>
+
+                  <path d="M155 350 Q200 410 245 350"
+                    fill="none" stroke="#d0c4ff"
+                    stroke-width="5" opacity=".7"/>
+
+                  <!-- Ears -->
+                  <ellipse cx="108" cy="220" rx="22" ry="35"
+                    fill="#d9947c"/>
+                  <ellipse cx="292" cy="220" rx="22" ry="35"
+                    fill="#d9947c"/>
+
+                  <!-- Face -->
+                  <path d="M115 160
+                    Q115 83 200 82
+                    Q285 83 285 160
+                    L278 260
+                    Q267 326 200 340
+                    Q133 326 122 260Z"
+                    fill="url(#skin)"/>
+
+                  <!-- Hair -->
+                  <path d="M113 190
+                    Q89 127 119 85
+                    Q134 37 187 48
+                    Q224 24 252 53
+                    Q304 60 293 125
+                    Q308 157 286 190
+                    L274 145
+                    Q252 155 235 131
+                    Q211 158 184 137
+                    Q159 164 130 149Z"
+                    fill="url(#hair)"/>
+
+                  <path d="M128 108 Q126 65 169 65
+                    Q185 42 209 64 Q232 40 253 73
+                    Q277 72 279 112
+                    Q250 94 232 112
+                    Q208 89 185 116
+                    Q161 94 128 108Z"
+                    fill="#44304e"/>
+
+                  <!-- Eyebrows -->
+                  <path d="M146 193 Q165 180 183 193"
+                    fill="none" stroke="#51323a"
+                    stroke-width="7" stroke-linecap="round"/>
+                  <path d="M218 193 Q237 180 255 193"
+                    fill="none" stroke="#51323a"
+                    stroke-width="7" stroke-linecap="round"/>
+
+                  <!-- Eyes -->
+                  <g id="eyes">
+                    <ellipse cx="165" cy="216" rx="12" ry="15" fill="#fff"/>
+                    <ellipse cx="235" cy="216" rx="12" ry="15" fill="#fff"/>
+                    <circle id="pupil-left" cx="165" cy="216" r="6" fill="#292033"/>
+                    <circle id="pupil-right" cx="235" cy="216" r="6" fill="#292033"/>
+                    <circle cx="167" cy="213" r="2" fill="#fff"/>
+                    <circle cx="237" cy="213" r="2" fill="#fff"/>
+                  </g>
+
+                  <!-- Nose -->
+                  <path d="M198 222 Q185 253 202 255"
+                    fill="none" stroke="#bd786a"
+                    stroke-width="5" stroke-linecap="round"/>
+
+                  <!-- Cheeks -->
+                  <ellipse cx="145" cy="259" rx="17" ry="8"
+                    fill="#f08e91" opacity=".35"/>
+                  <ellipse cx="255" cy="259" rx="17" ry="8"
+                    fill="#f08e91" opacity=".35"/>
+
+                  <!-- Mouth -->
+                  <path id="mouth"
+                    d="M177 279 Q200 299 223 279"
+                    fill="none" stroke="#8e4c57"
+                    stroke-width="5" stroke-linecap="round"/>
+
+                  <!-- Small facial detail -->
+                  <path d="M175 310 Q200 319 225 310"
+                    fill="none" stroke="#bb766e"
+                    stroke-width="2" opacity=".3"/>
+
+                </g>
+              </svg>
+            </div>
+
+            <p class="drag-label">
+              <strong>Grab my face.</strong> Drag it around and see what happens.
+            </p>
+          </div>
+
+          <div class="meter">
+            <div class="meter-heading">
+              <span>FACE STRETCH LEVEL</span>
+              <strong id="level">25%</strong>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill" id="meter-fill"></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Usman. Made with curiosity.</span>
+      <a href="./index.html">Back to portfolio ↗</a>
+    </footer>
+
+  </div>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const face = document.getElementById("face");
+    const displacement = document.getElementById("displacement");
+    const mouth = document.getElementById("mouth");
+    const level = document.getElementById("level");
+    const meterFill = document.getElementById("meter-fill");
+    const pupilLeft = document.getElementById("pupil-left");
+    const pupilRight = document.getElementById("pupil-right");
+
+    let dragging = false;
+    let pointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let stretchX = 0;
+    let stretchY = 0;
+
+    const clamp = (value, min, max) =>
+      Math.min(Math.max(value, min), max);
+
+    function updateFace(x, y) {
+      stretchX = clamp(x, -55, 55);
+      stretchY = clamp(y, -55, 55);
+
+      const distance = Math.sqrt(
+        stretchX * stretchX + stretchY * stretchY
+      );
+
+      const intensity = clamp(distance / 65, 0, 1);
+      const scaleX = 1 + (stretchX / 260);
+      const scaleY = 1 + (stretchY / 260);
+
+      face.style.transform =
+        `translate(${stretchX * .16}px, ${stretchY * .16}px)
+         scale(${scaleX}, ${scaleY})`;
+
+      displacement.setAttribute(
+        "scale",
+        String(Math.round(intensity * 25))
+      );
+      else if (intensity > .3) {
+        mouth.setAttribute(
+          "d",
+          "M177 279 Q200 304 223 279"
+        );
+      } else {
+        mouth.setAttribute(
+          "d",
+          "M177 279 Q200 299 223 279"
+        );
+      }
+    }
+
+    function resetFace() {
+      dragging = false;
+      pointerId = null;
+      stage.classList.remove("dragging");
+
+      face.style.transform = "translate(0, 0) scale(1, 1)";
+      displacement.setAttribute("scale", "0");
+
+      level.textContent = "25%";
+      meterFill.style.width = "25%";
+
+      mouth.setAttribute(
+        "d",
+        "M177 279 Q200 299 223 279"
+      );
+    }
+
+    stage.addEventListener("pointerdown", (event) => {
+      if (pointerId !== null) return;
+
+      dragging = true;
+      pointerId = event.pointerId;
+            const rect = stage.getBoundingClientRect();
+
+      startX = event.clientX - rect.left - rect.width / 2;
+      startY = event.clientY - rect.top - rect.height / 2;
+
+      stage.classList.add("dragging");
+      stage.setPointerCapture(event.pointerId);
+    });
+
+    stage.addEventListener("pointermove", (event) => {
+      if (!dragging || event.pointerId !== pointerId) return;
+
+      const rect = stage.getBoundingClientRect();
+
+      const currentX =
+        event.clientX - rect.left - rect.width / 2;
+      const currentY =
+        event.clientY - rect.top - rect.height / 2;
+
+      updateFace(
+        (currentX - startX) * 1.1,
+        (currentY - startY) * 1.1
+      );
+    });
+
+    function releasePointer(event) {
+      if (!dragging || event.pointerId !== pointerId) return;
+      resetFace();
+      stage.addEventListener("pointerup", releasePointer);
+    stage.addEventListener("pointercancel", releasePointer);
+    stage.addEventListener("lostpointercapture", () => {
+      if (dragging) resetFace();
+    });
+
+    // Eyes gently follow the pointer.
+    stage.addEventListener("pointermove", (event) => {
+      if (dragging) return;
+
+      const rect = stage.getBoundingClientRect();
+
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+
+      const eyeX = clamp((x - .5) * 9, -4, 4);
+      const eyeY = clamp((y - .45) * 6, -3, 3);
+
+      pupilLeft.setAttribute("cx", 165 + eyeX);
+      pupilLeft.setAttribute("cy", 216 + eyeY);
+
+      pupilRight.setAttribute("cx", 235 + eyeX);
+      pupilRight.setAttribute("cy", 216 + eyeY);
+    });
+      stage.addEventListener("pointerleave", () => {
+      if (dragging) return;
+
+      pupilLeft.setAttribute("cx", "165");
+      pupilLeft.setAttribute("cy", "216");
+
+      pupilRight.setAttribute("cx", "235");
+      pupilRight.setAttribute("cy", "216");
+    });
+  </script>
+</body>
+</html>
